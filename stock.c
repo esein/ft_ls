@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 02:15:07 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/03/21 14:21:24 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/03/21 19:05:48 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,27 @@ int				stock_arg(int argc, char **argv, struct s_lsopt *ls_opt)
 				ls_opt->a += ft_strchr(argv[i], 'a') ? 1 : 0;
 				ls_opt->r += ft_strchr(argv[i], 'r') ? 1 : 0;
 				ls_opt->t += ft_strchr(argv[i], 't') ? 1 : 0;
+				ls_opt->s += ft_strchr(argv[i], 's') ? 1 : 0;
 			}
 			i++;
 		}
 		return (0);
 }
 
-int				stock_space(struct s_infos *infos, struct s_space *space)
+int				stock_space(struct s_infos *infos, struct s_space *space,
+				struct s_lsopt *ls_opt)
 {
 	space->blocks = ft_intlen(infos->stats->st_blocks);
 	space->nlink = ft_intlen(infos->stats->st_nlink);
 	space->usr = ft_strlen(getpwuid(infos->stats->st_uid)->pw_name);
 	space->grp = ft_strlen(getgrgid(infos->stats->st_gid)->gr_name);
 	space->size = ft_intlen(infos->stats->st_size);
+	space->total = infos->stats->st_blocks;
 	while (infos->next != NULL)
 	{
 		infos = infos->next;
+		if (ls_opt->a == 1 || infos->file->d_name[0] != '.')
+			space->total += infos->stats->st_blocks;
 		if (space->blocks < ft_intlen(infos->stats->st_blocks))
 			space->blocks = ft_intlen(infos->stats->st_blocks);
 		if (space->nlink < ft_intlen(infos->stats->st_nlink))

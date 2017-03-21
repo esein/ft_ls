@@ -6,14 +6,20 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 16:40:57 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/03/21 16:50:02 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/03/21 17:02:18 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headerls.h"
 
-void		open_error()
+void		open_error(char *name)
 {
+	if (errno == ENOTDIR)
+	{
+		ft_putstr_size(name, 1);
+		ft_putchar('\n');
+		exit(0);
+	}
 	perror("");
 	exit(1);
 }

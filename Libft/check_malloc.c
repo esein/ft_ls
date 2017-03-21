@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlennb.c                                      :+:      :+:    :+:   */
+/*   check_malloc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/12 22:05:31 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/02/22 01:50:44 by gcadiou          ###   ########.fr       */
+/*   Created: 2017/02/17 08:56:45 by gcadiou           #+#    #+#             */
+/*   Updated: 2017/03/21 18:49:03 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_intlen(int nb)
+void	check_malloc(void *ptr)
 {
-	int		i;
-
-	i = 1;
-	if (nb < 0)
-		i++;
-	if (nb == 0)
-		return (1);
-	while ((nb /= 10) != 0)
-		i++;
-	return (i);
+	if (ptr == NULL)
+	{
+		perror(NULL);
+		exit(1);
+	}
 }

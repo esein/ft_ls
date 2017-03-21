@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 01:50:57 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/03/21 16:50:36 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/03/21 19:06:11 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <pwd.h>
 # include <time.h>
 # include <stdio.h>
+# include <errno.h>
 
 struct	s_lsopt
 {
@@ -30,6 +31,7 @@ struct	s_lsopt
 	char	a;
 	char	r;
 	char	t;
+	char	s;
 };
 
 struct	s_space
@@ -39,6 +41,7 @@ struct	s_space
 	int		usr;
 	int		grp;
 	int		size;
+	int		total;
 };
 
 struct	s_infos
@@ -49,17 +52,26 @@ struct	s_infos
 	struct s_infos	*next;
 };
 
-void				open_error();
+void				open_error(char *name);
 
-void				disp_all(struct s_infos *infos, struct s_space *space);
+void				disp_all(struct s_infos *infos, struct s_space *space,
+					struct s_lsopt *ls_opt);
 
-void				disp_simple(struct s_infos *infos, struct s_space *space);
+void				disp_simple(struct s_infos *infos, struct s_space *space,
+					struct s_lsopt *ls_opt);
+
+void				disp_divers(struct stat *stats, struct s_space *space);
+
+void				disp_mode(struct stat *stats);
+
+void				disp_total(struct s_space *space);
 
 struct s_infos		*addinfo();
 
 struct s_infos		*stock_infos(DIR *dir, struct s_infos *infos, char *name);
 
-int					stock_space(struct s_infos *infos, struct s_space *space);
+int					stock_space(struct s_infos *infos, struct s_space *space,
+					struct s_lsopt *ls_opt);
 
 int					info_init(struct s_infos *infos);
 

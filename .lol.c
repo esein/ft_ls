@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlennb.c                                      :+:      :+:    :+:   */
+/*   .lol.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/12 22:05:31 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/02/22 01:50:44 by gcadiou          ###   ########.fr       */
+/*   Created: 2017/03/21 18:59:13 by gcadiou           #+#    #+#             */
+/*   Updated: 2017/03/21 18:59:50 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "headerls.h"
 
-int		ft_intlen(int nb)
+void	lol()
 {
-	int		i;
-
-	i = 1;
-	if (nb < 0)
-		i++;
-	if (nb == 0)
-		return (1);
-	while ((nb /= 10) != 0)
-		i++;
-	return (i);
+	ft_putchar('a');
+	ft_putchar('a');
+	ft_putchar('a');
+	ft_putchar('a');
+	ft_putchar('a');
+	ft_putchar('a');
+	ft_putchar('a');
+	ft_putchar('a');
+	ft_putchar('a');
+	ft_putchar('a');
+	ft_putchar('a');
+	ft_putchar('a');
+	ft_putchar('a');
+	ft_putchar('a');
+	ft_putchar('a');
 }

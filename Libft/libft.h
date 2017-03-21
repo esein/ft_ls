@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 05:25:10 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/02/22 08:38:57 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/03/21 18:48:46 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <unistd.h>
 # include <string.h>
 # include <stdlib.h>
+# include <errno.h>
+# include <stdio.h>
 # include "get_next_line.h"
 
 # define ISSPACE(s, i) s[i] == ' ' || s[i] == '\n' || s[i] == '\t'
@@ -184,4 +186,6 @@ char				*ft_strcut(char *s, int start, int end);
 char				*ft_str_endcut(char *s, int size);
 
 char				*ft_str_endcut_until(char *s, char c);
+
+void				check_malloc(void *ptr);
 #endif

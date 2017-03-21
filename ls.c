@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 01:50:17 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/03/21 16:40:46 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/03/21 19:06:28 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,23 @@ int		ft_ls(char *name, struct s_lsopt *ls_opt)
 	infos = addinfo();
 	actual = infos;
 	if (!(dir = opendir(name)))
-		open_error();
+		open_error(name);
 	stock_infos(dir, infos, name);
-	stock_space(infos, &space);
+	stock_space(infos, &space, ls_opt);
+	if (ls_opt->l == 1)
+		disp_total(&space);
 	while (actual != NULL)
 	{
-		if (ls_opt->l == 1)
-			disp_all(actual, &space);
+		if (ls_opt->a == 0 && actual->file->d_name[0] == '.')
+			actual = actual->next;
 		else
-			disp_simple(actual, &space);
-		actual = actual->next;
+		{
+			if (ls_opt->l == 1)
+				disp_all(actual, &space, ls_opt);
+			else
+				disp_simple(actual, &space, ls_opt);
+			actual = actual->next;
+		}
 	}
 	return (0);
 }
@@ -62,7 +69,9 @@ int		main(int argc, char **argv)
 	char			*name;
 	int				first;
 
-	if (argc == 1)
+	stock_arg(argc, argv, &ls_opt);
+	first = firstname(argc, argv);
+	if (first == 0)
 	{
 		name = ft_strdup("./");
 		if (ls_opt.R == 1)
@@ -72,9 +81,6 @@ int		main(int argc, char **argv)
 	}
 	else
 	{
-		stock_arg(argc, argv, &ls_opt);
-		first = firstname(argc, argv);
-		ft_putnbr(first);
 		while (first < argc)
 		{
 			name = ft_strjoin(argv[first], "/");
