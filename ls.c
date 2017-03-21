@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 01:50:17 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/03/17 09:44:20 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/03/21 16:40:46 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,31 @@ int		firstname(int argc, char **argv)
 	return (0);
 }
 
-int		ft_ls(char *name, struct s_lsopt ls_opt)
+int		ft_ls(char *name, struct s_lsopt *ls_opt)
 {
 	DIR				*dir;
 	struct s_infos	*infos;
 	struct s_infos	*actual;
+	struct s_space	space;
 
 	infos = addinfo();
 	actual = infos;
-	dir = opendir(name);
+	if (!(dir = opendir(name)))
+		open_error();
 	stock_infos(dir, infos, name);
-	while (actual->next != NULL)
+	stock_space(infos, &space);
+	while (actual != NULL)
 	{
-		ft_putstr(actual->file->d_name);
+		if (ls_opt->l == 1)
+			disp_all(actual, &space);
+		else
+			disp_simple(actual, &space);
 		actual = actual->next;
 	}
 	return (0);
 }
 
-int		ls_R(char *name, struct s_lsopt ls_opt)
+int		ls_R(char *name, struct s_lsopt *ls_opt)
 {
 	return (0);
 }
@@ -56,20 +62,26 @@ int		main(int argc, char **argv)
 	char			*name;
 	int				first;
 
-	name = 0;
 	if (argc == 1)
+	{
 		name = ft_strdup("./");
+		if (ls_opt.R == 1)
+			ls_R(name, &ls_opt);
+		else
+			ft_ls(name, &ls_opt);
+	}
 	else
 	{
 		stock_arg(argc, argv, &ls_opt);
 		first = firstname(argc, argv);
-		while (first < argc - 1)
+		ft_putnbr(first);
+		while (first < argc)
 		{
 			name = ft_strjoin(argv[first], "/");
 			if (ls_opt.R == 1)
-				ls_R(name, ls_opt);
+				ls_R(name, &ls_opt);
 			else
-				ft_ls(name, ls_opt);
+				ft_ls(name, &ls_opt);
 			first++;
 		}
 	}
