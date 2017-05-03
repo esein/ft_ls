@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 02:15:07 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/03/21 19:05:48 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/04/26 11:01:11 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int				stock_arg(int argc, char **argv, struct s_lsopt *ls_opt)
 		int		i;
 		char	*buf;
 
-		i = 0;
+		i = 1;
+		init_arg(ls_opt);
 		while (i < argc)
 		{
 			if (argv[i][0] == '-')
@@ -28,11 +29,16 @@ int				stock_arg(int argc, char **argv, struct s_lsopt *ls_opt)
 				ls_opt->a += ft_strchr(argv[i], 'a') ? 1 : 0;
 				ls_opt->r += ft_strchr(argv[i], 'r') ? 1 : 0;
 				ls_opt->t += ft_strchr(argv[i], 't') ? 1 : 0;
+				ls_opt->u += ft_strchr(argv[i], 'u') ? 1 : 0;
 				ls_opt->s += ft_strchr(argv[i], 's') ? 1 : 0;
+				ls_opt->S += ft_strchr(argv[i], 'S') ? 1 : 0;
+				ls_opt->f += ft_strchr(argv[i], 'f') ? 1 : 0;
 			}
+			else
+				return (0);
 			i++;
 		}
-		return (0);
+		return (1);
 }
 
 int				stock_space(struct s_infos *infos, struct s_space *space,
@@ -47,7 +53,7 @@ int				stock_space(struct s_infos *infos, struct s_space *space,
 	while (infos->next != NULL)
 	{
 		infos = infos->next;
-		if (ls_opt->a == 1 || infos->file->d_name[0] != '.')
+		if (ls_opt->a > 0 || infos->name[0] != '.')
 			space->total += infos->stats->st_blocks;
 		if (space->blocks < ft_intlen(infos->stats->st_blocks))
 			space->blocks = ft_intlen(infos->stats->st_blocks);
@@ -78,9 +84,10 @@ struct s_infos	*stock_infos(DIR *dir, struct s_infos *infos, char *name)
 			infos = infos->next;
 		}
 		first = 0;
-		infos->file = tmp;
-		buf = ft_strjoin(name, infos->file->d_name);
-		infos->stats = (struct stat*)malloc(sizeof(struct stat));
+		infos->name = ft_strdup(tmp->d_name);
+		buf = ft_strjoin(name, infos->name);
+		if(!(infos->stats = (struct stat*)malloc(sizeof(struct stat))))
+			open_error(name);
 		stat(buf, infos->stats);
 	}
 	return (0);

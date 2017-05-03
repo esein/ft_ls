@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 01:50:17 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/03/21 19:06:28 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/04/26 11:02:29 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,29 +37,51 @@ int		ft_ls(char *name, struct s_lsopt *ls_opt)
 	infos = addinfo();
 	actual = infos;
 	if (!(dir = opendir(name)))
-		open_error(name);
+		return(open_error(name));
 	stock_infos(dir, infos, name);
 	stock_space(infos, &space, ls_opt);
-	if (ls_opt->l == 1)
+	check_tri(infos, ls_opt);
+	if (ls_opt->l > 0 || ls_opt->s > 0)
 		disp_total(&space);
 	while (actual != NULL)
 	{
-		if (ls_opt->a == 0 && actual->file->d_name[0] == '.')
+		if (ls_opt->a == 0 && actual->name[0] == '.')
 			actual = actual->next;
 		else
 		{
-			if (ls_opt->l == 1)
+			if (ls_opt->l > 0)
 				disp_all(actual, &space, ls_opt);
 			else
 				disp_simple(actual, &space, ls_opt);
 			actual = actual->next;
 		}
 	}
+	free(infos);
+	closedir(dir);
 	return (0);
 }
 
 int		ls_R(char *name, struct s_lsopt *ls_opt)
 {
+	DIR				*dir;
+	struct dirent	*file;
+
+	ft_ls(name, ls_opt);
+	if (!(dir = opendir(name)))
+		return (open_error(name));
+	file = readdir(dir);
+	while ((file = readdir(dir)))
+	{
+		if (file->d_name[0] != '.' || ls_opt->a == 1)
+			if (file->d_type == 4 && (ft_strcmp(file->d_name, "."))
+				&& (ft_strcmp(file->d_name, "..")))
+			{
+				ft_put_nb_c('\n', 1);
+				ft_putendl(ft_strjoin(name, ft_strjoin(file->d_name, ":")));
+				ls_R(ft_strjoin(name, ft_strjoin(file->d_name, "/")), ls_opt);
+			}
+	}
+	closedir(dir);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 01:50:57 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/03/21 19:06:11 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/04/26 10:59:16 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include <stdio.h>
 # include <errno.h>
 
+# define FILE_SIZE stats->st_size
+
 struct	s_lsopt
 {
 	char	l;
@@ -31,7 +33,10 @@ struct	s_lsopt
 	char	a;
 	char	r;
 	char	t;
+	char	u;
 	char	s;
+	char	S;
+	char	f;
 };
 
 struct	s_space
@@ -46,13 +51,29 @@ struct	s_space
 
 struct	s_infos
 {
-	struct dirent	*file;
-	struct s_space	space;
+	char			*name;
 	struct stat		*stats;
 	struct s_infos	*next;
 };
 
-void				open_error(char *name);
+void				disp_time(struct stat *stats, struct s_space *space,
+					struct s_lsopt *ls_opt);
+
+void				init_arg(struct s_lsopt *ls_opt);
+
+void				check_tri(struct s_infos *infos, struct s_lsopt *ls_opt);
+
+void				tri_atime(struct s_infos *infos, struct s_lsopt *ls_opt);
+
+void				tri_mtime(struct s_infos *infos, struct s_lsopt *ls_opt);
+
+void				tri_size(struct s_infos *infos, struct s_lsopt *ls_opt);
+
+void				tri_ascii(struct s_infos *infos, struct s_lsopt *ls_opt);
+
+void				list_swap(struct s_infos *infos);
+
+int					open_error(char *name);
 
 void				disp_all(struct s_infos *infos, struct s_space *space,
 					struct s_lsopt *ls_opt);
@@ -73,7 +94,7 @@ struct s_infos		*stock_infos(DIR *dir, struct s_infos *infos, char *name);
 int					stock_space(struct s_infos *infos, struct s_space *space,
 					struct s_lsopt *ls_opt);
 
-int					info_init(struct s_infos *infos);
+void				info_init(struct s_infos *infos);
 
 int					stock_arg(int argc, char **argv, struct s_lsopt *ls_opt);
 
