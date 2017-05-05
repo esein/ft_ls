@@ -1,0 +1,4 @@
+debut de disp_column.
+besoin de changer l'organisation de tous les disp.
+use disp_simple dans le disp_column.
+faire fonction pour placer la partie actuelle de ls.c qui lit et affiche tous les fichiers stockes.
