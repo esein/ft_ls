@@ -9,3 +9,5 @@ last :
 en train de gerer les links.
 segfault etrange denrier link en faisant ls -l.
 
+autre :
+penser a mettre error_malloc dans la libft
