@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 01:50:57 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/04/26 10:59:16 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/03 19:01:48 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <time.h>
 # include <stdio.h>
 # include <errno.h>
+# include <sys/ioctl.h>
 
 # define FILE_SIZE stats->st_size
 
