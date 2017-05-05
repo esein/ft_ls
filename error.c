@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 16:40:57 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/04/26 10:59:12 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/05 21:15:42 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,10 @@ int		open_error(char *name)
 	}
 	perror("");
 	return (0);
+}
+
+void	malloc_error()
+{
+	perror("");
+	exit(0);
 }
