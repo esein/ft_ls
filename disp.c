@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 14:02:50 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/04/26 10:59:06 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/05 21:39:24 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,24 @@ void		disp_name(struct s_infos *infos)
 {
 	if (S_ISDIR(infos->stats->st_mode))
 		COLOR(S_CYAN);
-	else if (infos->stats->st_mode & S_IXUSR
+	else if (S_ISREG(infos->stats->st_mode) && (infos->stats->st_mode & S_IXUSR
 			|| infos->stats->st_mode & S_IXGRP
-			|| infos->stats->st_mode & S_IXOTH)
+			|| infos->stats->st_mode & S_IXOTH))
 		COLOR(RED);
 	else if (S_ISLNK(infos->stats->st_mode))
-		COLOR(S_MAGENTA);
+		COLOR(MAGENTA);
 	ft_putstr(infos->name);
 	COLOR(NONE);
 }
 
+void		disp_lnk_name(struct s_infos *infos)
+{
+	COLOR(S_CYAN);
+	ft_putstr(infos->name);
+	COLOR(NONE);
+	ft_putstr(" -> ");
+	ft_putstr(infos->lnk_name);
+}
 void		disp_simple(struct s_infos *infos, struct s_space *space,
 			struct s_lsopt *ls_opt)
 {
@@ -58,6 +66,9 @@ void		disp_all(struct s_infos *infos, struct s_space *space,
 		ft_putstr("  ");
 		disp_time(infos->stats, space, ls_opt);
 		ft_putchar(' ');
-		disp_name(infos);
+		if (S_ISLNK(infos->stats->st_mode))
+			disp_lnk_name(infos);
+		else
+			disp_name(infos);
 		ft_putchar('\n');
 }

@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 09:07:05 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/04/26 11:00:52 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/05 21:46:05 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void				info_init(struct s_infos *infos)
 		infos->next = NULL;
 		infos->name = NULL;
 		infos->stats = NULL;
+		infos->lnk_name = NULL;
 }
 
 struct s_infos		*addinfo()

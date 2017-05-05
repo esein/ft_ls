@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 01:50:57 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/03 19:01:48 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/05 21:15:32 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,12 @@ struct	s_space
 struct	s_infos
 {
 	char			*name;
+	char			*lnk_name;
 	struct stat		*stats;
 	struct s_infos	*next;
 };
+
+void				malloc_error();
 
 void				disp_time(struct stat *stats, struct s_space *space,
 					struct s_lsopt *ls_opt);
