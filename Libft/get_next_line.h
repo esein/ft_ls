@@ -6,14 +6,13 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 17:08:30 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/01/16 14:23:23 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/08 01:32:35 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # define BUFF_SIZE 1
-# define MULTI_FD 100
 
 typedef struct	s_gnl
 {

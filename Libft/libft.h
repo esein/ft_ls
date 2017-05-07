@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 05:25:10 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/03/21 18:48:46 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/08 01:01:57 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,5 +187,5 @@ char				*ft_str_endcut(char *s, int size);
 
 char				*ft_str_endcut_until(char *s, char c);
 
-void				check_malloc(void *ptr);
+void				check_malloc(void *ptr, char *s);
 #endif

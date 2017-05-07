@@ -6,17 +6,17 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 08:56:45 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/03/21 18:49:03 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/08 01:02:10 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	check_malloc(void *ptr)
+void	check_malloc(void *ptr, char *s)
 {
 	if (ptr == NULL)
 	{
-		perror(NULL);
+		perror(s);
 		exit(1);
 	}
 }
