@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 02:15:07 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/05 21:46:07 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/08 01:47:10 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,12 @@ struct s_infos	*stock_infos(DIR *dir, struct s_infos *infos, char *name)
 		first = 0;
 		infos->name = ft_strdup(tmp->d_name);
 		buf = ft_strjoin(name, infos->name);
-		if (!(infos->stats = (struct stat*)malloc(sizeof(struct stat))))
-			malloc_error();
+		check_malloc(infos->stats = (struct stat*)malloc(sizeof(struct stat)),
+				"ls: stocks_infos");
 		if (tmp->d_type == DT_LNK)
 		{
-			if (!(infos->lnk_name = (char *)malloc(sizeof(char) * 250)))
-				malloc_error();
+			check_malloc(infos->lnk_name = (char *)malloc(sizeof(char) * 250),
+					"ls: stock_infos");
 			infos->lnk_name[0] = 'a';
 			infos->lnk_name[1] = '\0';
 		}

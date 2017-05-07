@@ -6,7 +6,7 @@
 #    By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/24 16:55:08 by gcadiou           #+#    #+#              #
-#    Updated: 2017/05/03 19:32:06 by gcadiou          ###   ########.fr        #
+#    Updated: 2017/05/05 19:53:09 by gcadiou          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,7 @@ PATHLIB = ~/Mygit/ft_ls/Libft/
 all: $(NAME)
 
 $(NAME):
-	gcc $(SRC) Libft/libft.a -I $(PATHLIB) -v
-
+	gcc $(SRC) Libft/libft.a -I $(PATHLIB)
 # -o $(NAME)
 
 compillib:

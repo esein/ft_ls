@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 09:07:05 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/05 21:46:05 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/08 01:45:03 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ struct s_infos		*addinfo()
 	struct s_infos		*new;
 
 	new = NULL;
-	if (!(new = (struct s_infos*)malloc(sizeof(struct s_infos))))
-		exit(0);
+	check_malloc(new = (struct s_infos*)malloc(sizeof(struct s_infos)),
+			"ls: addinfo");
 	info_init(new);
 	return (new);
 }
