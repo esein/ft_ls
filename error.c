@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 16:40:57 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/08 01:36:10 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/08 07:26:53 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ int		open_error(char *name)
 		ft_putchar('\n');
 		return (0);
 	}
-	perror("");
+	perror(name);
 	return (0);
 }
