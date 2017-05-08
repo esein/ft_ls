@@ -5,9 +5,7 @@ faire fonction pour placer la partie actuelle de ls.c qui lit et affiche tous le
 
 gestion d'erreur a faire !
 
-last :
-en train de gerer les links.
-segfault etrange denrier link en faisant ls -l.
+check test du filechecker
 
-autre :
-penser a mettre error_malloc dans la libft
+last :
+gerer le tri du -R
