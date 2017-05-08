@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 09:07:05 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/08 01:45:03 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/08 04:47:48 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,18 @@ void				init_arg(struct s_lsopt *ls_opt)
 
 void				list_swap(struct s_infos *infos)
 {
-	char	*name_tmp;
+	char			*name_tmp;
+	char			*lnk_name_tmp;
 	struct stat		*stats_tmp;
 
 	name_tmp = infos->name;
+	lnk_name_tmp = infos->lnk_name;
 	stats_tmp = infos->stats;
 	infos->name = infos->next->name;
+	infos->lnk_name = infos->next->lnk_name;
 	infos->stats = infos->next->stats;
 	infos->next->name = name_tmp;
+	infos->next->lnk_name = lnk_name_tmp;
 	infos->next->stats = stats_tmp;
 }
 

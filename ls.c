@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 01:50:17 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/04/26 11:02:29 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/08 07:40:45 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		ft_ls(char *name, struct s_lsopt *ls_opt)
 		return(open_error(name));
 	stock_infos(dir, infos, name);
 	stock_space(infos, &space, ls_opt);
-	check_tri(infos, ls_opt);
+//	check_tri(infos, ls_opt);
 	if (ls_opt->l > 0 || ls_opt->s > 0)
 		disp_total(&space);
 	while (actual != NULL)

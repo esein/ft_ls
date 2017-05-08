@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 14:02:50 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/05 21:39:24 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/08 07:47:48 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,13 @@ void		disp_name(struct s_infos *infos)
 
 void		disp_lnk_name(struct s_infos *infos)
 {
-	COLOR(S_CYAN);
+	COLOR(MAGENTA);
 	ft_putstr(infos->name);
 	COLOR(NONE);
 	ft_putstr(" -> ");
 	ft_putstr(infos->lnk_name);
 }
+
 void		disp_simple(struct s_infos *infos, struct s_space *space,
 			struct s_lsopt *ls_opt)
 {

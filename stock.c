@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 02:15:07 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/08 01:47:10 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/08 07:48:30 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,19 @@ int				stock_space(struct s_infos *infos, struct s_space *space,
 	return (0);
 }
 
+void			stock_lnk_name(struct s_infos *infos, char *path)
+{
+	int		lnk_len;
+
+	check_malloc(infos->lnk_name =
+			(char *)malloc(sizeof(char) * 1024),
+			"ls: stock_infos(2)");
+	if ((lnk_len = readlink(path, infos->lnk_name, sizeof(char) * 1024)) < 0)
+		open_error(path);
+	infos->lnk_name[lnk_len] = '\0';
+}
+
+
 struct s_infos	*stock_infos(DIR *dir, struct s_infos *infos, char *name)
 {
 	int				first;
@@ -86,16 +99,11 @@ struct s_infos	*stock_infos(DIR *dir, struct s_infos *infos, char *name)
 		first = 0;
 		infos->name = ft_strdup(tmp->d_name);
 		buf = ft_strjoin(name, infos->name);
-		check_malloc(infos->stats = (struct stat*)malloc(sizeof(struct stat)),
-				"ls: stocks_infos");
+		check_malloc((infos->stats = (struct stat*)malloc(sizeof(struct stat))),
+				"ls: stocks_infos(1)");
 		if (tmp->d_type == DT_LNK)
-		{
-			check_malloc(infos->lnk_name = (char *)malloc(sizeof(char) * 250),
-					"ls: stock_infos");
-			infos->lnk_name[0] = 'a';
-			infos->lnk_name[1] = '\0';
-		}
-		if (!(lstat(buf, infos->stats)))
+			stock_lnk_name(infos, buf);
+		if ((lstat(buf, infos->stats)) < 0)
 			open_error(name);
 	}
 	return (0);
