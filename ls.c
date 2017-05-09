@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 01:50:17 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/09 04:33:05 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/09 07:59:56 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ struct s_infos	*ft_ls(char *name, struct s_lsopt *ls_opt)
 	stock_infos(dir, infos, name);
 	stock_space(infos, &space, ls_opt);
 	check_tri(infos, ls_opt);
+	stock_index(infos, ls_opt, &space);
 	if (ls_opt->l > 0 || ls_opt->s > 0)
 		disp_total(&space);
 	while (actual != NULL)
@@ -51,8 +52,10 @@ struct s_infos	*ft_ls(char *name, struct s_lsopt *ls_opt)
 		{
 			if (ls_opt->l > 0)
 				disp_all(actual, &space, ls_opt);
-			else
+			else if (ls_opt->one > 0)
 				disp_simple(actual, &space, ls_opt);
+		//	else
+		//		disp_columns(actual, &space, ls_opt);
 			actual = actual->next;
 		}
 	}

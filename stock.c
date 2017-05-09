@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 02:15:07 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/08 07:48:30 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/09 08:15:47 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int				stock_arg(int argc, char **argv, struct s_lsopt *ls_opt)
 		{
 			if (argv[i][0] == '-')
 			{
+				ls_opt->one += ft_strchr(argv[i], '1') ? 1 : 0;
 				ls_opt->l += ft_strchr(argv[i], 'l') ? 1 : 0;
 				ls_opt->R += ft_strchr(argv[i], 'R') ? 1 : 0;
 				ls_opt->a += ft_strchr(argv[i], 'a') ? 1 : 0;
@@ -50,9 +51,11 @@ int				stock_space(struct s_infos *infos, struct s_space *space,
 	space->grp = ft_strlen(getgrgid(infos->stats->st_gid)->gr_name);
 	space->size = ft_intlen(infos->stats->st_size);
 	space->total = infos->stats->st_blocks;
-	while (infos->next != NULL)
+	space->name = ft_strlen(infos->name);
+	while ((infos = infos->next) != NULL)
 	{
-		infos = infos->next;
+		if (space->name < ft_strlen(infos->name))
+			space->name = ft_strlen(infos->name);
 		if (ls_opt->a > 0 || infos->name[0] != '.')
 			space->total += infos->stats->st_blocks;
 		if (space->blocks < ft_intlen(infos->stats->st_blocks))
@@ -67,6 +70,24 @@ int				stock_space(struct s_infos *infos, struct s_space *space,
 			space->size = ft_intlen(infos->stats->st_size);
 	}
 	return (0);
+}
+
+void			stock_index(struct s_infos *infos, struct s_lsopt *ls_opt,
+							struct s_space *space)
+{
+	int		i;
+
+	i = 1;
+	while (infos != NULL)
+	{
+		if (infos->name[0] != '.' || ls_opt->a != 0)
+		{
+			infos->index = i;
+			i++;
+		}
+		infos = infos->next;
+	}
+	space->nb_files = i - 1;
 }
 
 void			stock_lnk_name(struct s_infos *infos, char *path)

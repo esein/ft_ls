@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 09:07:05 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/08 04:47:48 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/09 07:57:28 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void				init_arg(struct s_lsopt *ls_opt)
 {
+	ls_opt->one = 0;
 	ls_opt->l = 0;
 	ls_opt->R = 0;
 	ls_opt->a = 0;

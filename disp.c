@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 14:02:50 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/09 04:10:24 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/09 08:02:33 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void		disp_lnk_name(struct s_infos *infos)
 }
 
 void		disp_simple(struct s_infos *infos, struct s_space *space,
-			struct s_lsopt *ls_opt)
+						struct s_lsopt *ls_opt)
 {
 	if (ls_opt->s > 0)
 	{
@@ -54,7 +54,7 @@ void		disp_simple(struct s_infos *infos, struct s_space *space,
 }
 
 void		disp_all(struct s_infos *infos, struct s_space *space,
-			struct s_lsopt *ls_opt)
+					struct s_lsopt *ls_opt)
 {
 		if (ls_opt->s > 0)
 		{
