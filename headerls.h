@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 01:50:57 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/08 04:45:12 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/09 04:32:49 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void				tri_ascii(struct s_infos *infos, struct s_lsopt *ls_opt);
 
 void				list_swap(struct s_infos *infos);
 
-int					open_error(char *name);
+void				*open_error(char *name);
 
 void				disp_all(struct s_infos *infos, struct s_space *space,
 					struct s_lsopt *ls_opt);
@@ -102,5 +102,5 @@ int					stock_arg(int argc, char **argv, struct s_lsopt *ls_opt);
 
 int					ls_R(char *name, struct s_lsopt *ls_opt);
 
-int					ft_ls(char *name, struct s_lsopt *ls_opt);
+struct s_infos		*ft_ls(char *name, struct s_lsopt *ls_opt);
 #endif
