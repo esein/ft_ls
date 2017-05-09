@@ -6,14 +6,14 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 01:50:17 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/08 08:20:37 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/09 04:33:05 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "headerls.h"
 
-int		firstname(int argc, char **argv)
+int				firstname(int argc, char **argv)
 {
 	int		i;
 
@@ -27,7 +27,7 @@ int		firstname(int argc, char **argv)
 	return (0);
 }
 
-int		ft_ls(char *name, struct s_lsopt *ls_opt)
+struct s_infos	*ft_ls(char *name, struct s_lsopt *ls_opt)
 {
 	DIR				*dir;
 	struct s_infos	*infos;
@@ -56,12 +56,11 @@ int		ft_ls(char *name, struct s_lsopt *ls_opt)
 			actual = actual->next;
 		}
 	}
-	free(infos);
 	closedir(dir);
-	return (0);
+	return (infos);
 }
 
-int		ls_R(char *name, struct s_lsopt *ls_opt)
+/*int			ls_R(char *name, struct s_lsopt *ls_opt)
 {
 	DIR				*dir;
 	struct dirent	*file;
@@ -72,7 +71,7 @@ int		ls_R(char *name, struct s_lsopt *ls_opt)
 	file = readdir(dir);
 	while ((file = readdir(dir)))
 	{
-		if (file->d_name[0] != '.' || ls_opt->a == 1)
+		if (file->d_name[0] != '.' || ls_opt->a != 0)
 			if (file->d_type == 4 && (ft_strcmp(file->d_name, "."))
 				&& (ft_strcmp(file->d_name, "..")))
 			{
@@ -84,8 +83,8 @@ int		ls_R(char *name, struct s_lsopt *ls_opt)
 	closedir(dir);
 	return (0);
 }
-
-int		main(int argc, char **argv)
+*/
+int			main(int argc, char **argv)
 {
 	struct s_lsopt	ls_opt;
 	char			*name;
