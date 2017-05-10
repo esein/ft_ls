@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/09 02:53:37 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/09 04:36:11 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/10 03:55:51 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int			ls_R(char *name, struct s_lsopt *ls_opt)
 	actual = infos;
 	while (actual != NULL)
 	{
-		if (actual->name[0] != '.' || ls_opt->a != 0)
 			if (S_ISDIR(actual->stats->st_mode) &&
 			(ft_strcmp(actual->name, ".") && (ft_strcmp(actual->name, ".."))))
 			{

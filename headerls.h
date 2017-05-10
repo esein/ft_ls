@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 01:50:57 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/09 07:58:26 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/10 06:33:07 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,13 @@ struct	s_infos
 	struct s_infos	*next;
 };
 
+void				disp_list(struct s_infos *infos, struct s_space *space,
+					struct s_lsopt *ls_opt);
+
+void				disp_name(struct s_infos *infos);
+
+void				disp_block(struct stat *stats, struct s_space *space);
+
 void				disp_columns(struct s_infos *infos, struct s_space *space,
 								struct s_lsopt *ls_opt);
 
@@ -84,7 +91,7 @@ void				list_swap(struct s_infos *infos);
 
 void				*open_error(char *name);
 
-void				disp_all(struct s_infos *infos, struct s_space *space,
+void				disp_l(struct s_infos *infos, struct s_space *space,
 							struct s_lsopt *ls_opt);
 
 void				disp_simple(struct s_infos *infos, struct s_space *space,
@@ -98,7 +105,8 @@ void				disp_total(struct s_space *space);
 
 struct s_infos		*addinfo();
 
-struct s_infos		*stock_infos(DIR *dir, struct s_infos *infos, char *name);
+struct s_infos		*stock_infos(DIR *dir, struct s_infos *infos, char *name,
+								struct s_lsopt *ls_opt);
 
 int					stock_space(struct s_infos *infos, struct s_space *space,
 								struct s_lsopt *ls_opt);

@@ -6,13 +6,13 @@
 #    By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/24 16:55:08 by gcadiou           #+#    #+#              #
-#    Updated: 2017/05/09 04:10:45 by gcadiou          ###   ########.fr        #
+#    Updated: 2017/05/10 04:20:47 by gcadiou          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls
 
-SRC = ls.c  stock.c list_ls.c disp.c error.c disp2.c tri.c opt_R.c
+SRC = ls.c  stock.c list_ls.c disp.c error.c disp2.c tri.c opt_R.c disp_columns.c
 
 PATHLIB = ~/Mygit/ft_ls/Libft/
 

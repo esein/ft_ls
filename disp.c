@@ -6,17 +6,13 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 14:02:50 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/09 08:02:33 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/10 06:31:23 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headerls.h"
 
-void		disp_block(struct stat *stats, struct s_space *space)
-{
-	ft_put_nb_c(' ', space->blocks - ft_intlen(stats->st_blocks));
-	ft_putnbr(stats->st_blocks);
-}
+
 
 void		disp_name(struct s_infos *infos)
 {
@@ -53,7 +49,7 @@ void		disp_simple(struct s_infos *infos, struct s_space *space,
 	ft_putchar('\n');
 }
 
-void		disp_all(struct s_infos *infos, struct s_space *space,
+void		disp_l(struct s_infos *infos, struct s_space *space,
 					struct s_lsopt *ls_opt)
 {
 		if (ls_opt->s > 0)
@@ -72,4 +68,17 @@ void		disp_all(struct s_infos *infos, struct s_space *space,
 		else
 			disp_name(infos);
 		ft_putchar('\n');
+}
+
+void	disp_list(struct s_infos *infos, struct s_space *space,
+					struct s_lsopt *ls_opt)
+{
+	while (infos != NULL)
+	{
+		if (ls_opt->l > 0)
+			disp_l(infos, space, ls_opt);
+		else
+			disp_simple(infos, space, ls_opt);
+		infos = infos->next;
+	}
 }

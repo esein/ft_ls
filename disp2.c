@@ -6,11 +6,17 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 18:08:36 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/04/26 10:59:09 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/10 06:15:09 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headerls.h"
+
+void		disp_block(struct stat *stats, struct s_space *space)
+{
+	ft_put_nb_c(' ', space->blocks - ft_intlen(stats->st_blocks));
+	ft_putnbr(stats->st_blocks);
+}
 
 void		disp_total(struct s_space *space)
 {

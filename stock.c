@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 02:15:07 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/09 08:15:47 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/10 03:50:12 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int				stock_arg(int argc, char **argv, struct s_lsopt *ls_opt)
 }
 
 int				stock_space(struct s_infos *infos, struct s_space *space,
-				struct s_lsopt *ls_opt)
+							struct s_lsopt *ls_opt)
 {
 	space->blocks = ft_intlen(infos->stats->st_blocks);
 	space->nlink = ft_intlen(infos->stats->st_nlink);
@@ -103,29 +103,32 @@ void			stock_lnk_name(struct s_infos *infos, char *path)
 }
 
 
-struct s_infos	*stock_infos(DIR *dir, struct s_infos *infos, char *name)
+struct s_infos	*stock_infos(DIR *dir, struct s_infos *infos, char *name,
+							struct s_lsopt *ls_opt)
 {
 	int				first;
 	char			*buf;
 	struct dirent	*tmp;
 
-	first = 1;
 	while ((tmp = readdir(dir)))
 	{
-		if (first == 0)
+		if (ls_opt->a > 0 || tmp->d_name[0] != '.')
 		{
-			infos->next = addinfo();
-			infos = infos->next;
+			if (first == 1)
+			{
+				infos->next = addinfo();
+				infos = infos->next;
+			}
+			first = 1;
+			infos->name = ft_strdup(tmp->d_name);
+			buf = ft_strjoin(name, infos->name);
+			check_malloc((infos->stats = (struct stat*)malloc(
+							sizeof(struct stat))), "ls: stocks_infos(1)");
+			if (tmp->d_type == DT_LNK)
+				stock_lnk_name(infos, buf);
+			if ((lstat(buf, infos->stats)) < 0)
+				open_error(name);
 		}
-		first = 0;
-		infos->name = ft_strdup(tmp->d_name);
-		buf = ft_strjoin(name, infos->name);
-		check_malloc((infos->stats = (struct stat*)malloc(sizeof(struct stat))),
-				"ls: stocks_infos(1)");
-		if (tmp->d_type == DT_LNK)
-			stock_lnk_name(infos, buf);
-		if ((lstat(buf, infos->stats)) < 0)
-			open_error(name);
 	}
 	return (0);
 }

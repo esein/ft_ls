@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 01:50:17 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/09 07:59:56 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/10 06:34:06 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,27 +38,34 @@ struct s_infos	*ft_ls(char *name, struct s_lsopt *ls_opt)
 	actual = infos;
 	if (!(dir = opendir(name)))
 		return(open_error(name));
-	stock_infos(dir, infos, name);
+	stock_infos(dir, infos, name, ls_opt);
 	stock_space(infos, &space, ls_opt);
 	check_tri(infos, ls_opt);
 	stock_index(infos, ls_opt, &space);
 	if (ls_opt->l > 0 || ls_opt->s > 0)
 		disp_total(&space);
-	while (actual != NULL)
+/*	while (actual != NULL)
 	{
 		if (ls_opt->a == 0 && actual->name[0] == '.')
 			actual = actual->next;
 		else
 		{
 			if (ls_opt->l > 0)
-				disp_all(actual, &space, ls_opt);
+				disp_l(actual, &space, ls_opt);
 			else if (ls_opt->one > 0)
 				disp_simple(actual, &space, ls_opt);
-		//	else
-		//		disp_columns(actual, &space, ls_opt);
+			else
+			{
+				disp_columns(actual, &space, ls_opt);
+				break;
+			}
 			actual = actual->next;
 		}
-	}
+	}*/
+	if (ls_opt->l > 0 || ls_opt->one > 0)
+		disp_list(infos, &space, ls_opt);
+	else
+		disp_columns(infos, &space, ls_opt);
 	closedir(dir);
 	return (infos);
 }
