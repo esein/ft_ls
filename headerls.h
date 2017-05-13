@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 01:50:57 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/10 06:33:07 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/13 19:45:40 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@
 # include <sys/ioctl.h>
 
 # define FILE_SIZE stats->st_size
+
+struct	s_varcol
+{
+	int	i;
+	int l;
+	int	n;
+	int c;
+	int	max_line;
+	int	max_col;
+};
 
 struct	s_lsopt
 {
@@ -69,11 +79,10 @@ void				disp_name(struct s_infos *infos);
 
 void				disp_block(struct stat *stats, struct s_space *space);
 
-void				disp_columns(struct s_infos *infos, struct s_space *space,
+int				disp_columns(struct s_infos *infos, struct s_space *space,
 								struct s_lsopt *ls_opt);
 
-void				disp_time(struct stat *stats, struct s_space *space,
-							struct s_lsopt *ls_opt);
+void				disp_time(struct stat *stats, struct s_lsopt *ls_opt);
 
 void				init_arg(struct s_lsopt *ls_opt);
 

@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 02:15:07 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/10 03:50:12 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/12 16:54:29 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@
 int				stock_arg(int argc, char **argv, struct s_lsopt *ls_opt)
 {
 		int		i;
-		char	*buf;
 
 		i = 1;
 		init_arg(ls_opt);
 		while (i < argc)
 		{
-			if (argv[i][0] == '-')
+			if (argv[i][0] == '-' && argv[i][1])
 			{
 				ls_opt->one += ft_strchr(argv[i], '1') ? 1 : 0;
 				ls_opt->l += ft_strchr(argv[i], 'l') ? 1 : 0;
@@ -106,7 +105,7 @@ void			stock_lnk_name(struct s_infos *infos, char *path)
 struct s_infos	*stock_infos(DIR *dir, struct s_infos *infos, char *name,
 							struct s_lsopt *ls_opt)
 {
-	int				first;
+	int				notfirst;
 	char			*buf;
 	struct dirent	*tmp;
 
@@ -114,12 +113,12 @@ struct s_infos	*stock_infos(DIR *dir, struct s_infos *infos, char *name,
 	{
 		if (ls_opt->a > 0 || tmp->d_name[0] != '.')
 		{
-			if (first == 1)
+			if (notfirst == 1)
 			{
 				infos->next = addinfo();
 				infos = infos->next;
 			}
-			first = 1;
+			notfirst = 1;
 			infos->name = ft_strdup(tmp->d_name);
 			buf = ft_strjoin(name, infos->name);
 			check_malloc((infos->stats = (struct stat*)malloc(

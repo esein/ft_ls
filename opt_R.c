@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/09 02:53:37 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/10 03:55:51 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/12 16:55:48 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int			ls_R(char *name, struct s_lsopt *ls_opt)
 {
-	DIR				*dir;
 	struct s_infos	*infos;
 	struct s_infos	*actual;
 

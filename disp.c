@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 14:02:50 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/10 06:31:23 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/13 20:34:38 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,12 @@ void		disp_l(struct s_infos *infos, struct s_space *space,
 					struct s_lsopt *ls_opt)
 {
 		if (ls_opt->s > 0)
-		{
 			disp_block(infos->stats, space);
-			ft_putchar(' ');
-		}
 		disp_mode(infos->stats);
 		ft_put_nb_c(' ', 2);
 		disp_divers(infos->stats, space);
 		ft_putstr("  ");
-		disp_time(infos->stats, space, ls_opt);
+		disp_time(infos->stats, ls_opt);
 		ft_putchar(' ');
 		if (S_ISLNK(infos->stats->st_mode))
 			disp_lnk_name(infos);
