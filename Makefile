@@ -6,7 +6,7 @@
 #    By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/24 16:55:08 by gcadiou           #+#    #+#              #
-#    Updated: 2017/05/10 04:20:47 by gcadiou          ###   ########.fr        #
+#    Updated: 2017/05/12 16:54:05 by gcadiou          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,12 @@ SRC = ls.c  stock.c list_ls.c disp.c error.c disp2.c tri.c opt_R.c disp_columns.
 
 PATHLIB = ~/Mygit/ft_ls/Libft/
 
+FLAG = -Wall -Werror -Wextra
+
 all: $(NAME)
 
 $(NAME):
-	gcc $(SRC) Libft/libft.a -I $(PATHLIB) -o $(NAME)
+	gcc $(SRC) Libft/libft.a -I $(PATHLIB) -o $(NAME) $(FLAG)
 
 compillib:
 	make -C $(PATHLIB) re
