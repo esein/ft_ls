@@ -1,11 +1,11 @@
-debut de disp_column.
 besoin de changer l'organisation de tous les disp.
-use disp_simple dans le disp_column.
-faire fonction pour placer la partie actuelle de ls.c qui lit et affiche tous les fichiers stockes.
 
 gestion d'erreur a faire !
 
+quand plusieurs arguments afficher le nom de l'argument + ':' avant d'afficher les entrees.
+
 check test du filechecker
 
+changer de sortie les puterror
 last :
-disp_column plus qu'a mettre des \n en fonction de l'index.
+gerer erreur mauvais option (arg invalide & afficher usage).
