@@ -6,40 +6,12 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 02:15:07 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/12 16:54:29 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/15 16:56:15 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "headerls.h"
-
-int				stock_arg(int argc, char **argv, struct s_lsopt *ls_opt)
-{
-		int		i;
-
-		i = 1;
-		init_arg(ls_opt);
-		while (i < argc)
-		{
-			if (argv[i][0] == '-' && argv[i][1])
-			{
-				ls_opt->one += ft_strchr(argv[i], '1') ? 1 : 0;
-				ls_opt->l += ft_strchr(argv[i], 'l') ? 1 : 0;
-				ls_opt->R += ft_strchr(argv[i], 'R') ? 1 : 0;
-				ls_opt->a += ft_strchr(argv[i], 'a') ? 1 : 0;
-				ls_opt->r += ft_strchr(argv[i], 'r') ? 1 : 0;
-				ls_opt->t += ft_strchr(argv[i], 't') ? 1 : 0;
-				ls_opt->u += ft_strchr(argv[i], 'u') ? 1 : 0;
-				ls_opt->s += ft_strchr(argv[i], 's') ? 1 : 0;
-				ls_opt->S += ft_strchr(argv[i], 'S') ? 1 : 0;
-				ls_opt->f += ft_strchr(argv[i], 'f') ? 1 : 0;
-			}
-			else
-				return (0);
-			i++;
-		}
-		return (1);
-}
 
 int				stock_space(struct s_infos *infos, struct s_space *space,
 							struct s_lsopt *ls_opt)

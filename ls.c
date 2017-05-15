@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 01:50:17 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/10 06:34:06 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/13 20:55:06 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ int				firstname(int argc, char **argv)
 			return (i);
 		i++;
 	}
-	return (0);
+	if (argc > 1)
+		if (argv[1][0] == '-' && argv[1][1] == '\0')
+			return (1);
+		return (0);
 }
 
 struct s_infos	*ft_ls(char *name, struct s_lsopt *ls_opt)
@@ -39,6 +42,8 @@ struct s_infos	*ft_ls(char *name, struct s_lsopt *ls_opt)
 	if (!(dir = opendir(name)))
 		return(open_error(name));
 	stock_infos(dir, infos, name, ls_opt);
+	if (infos->stats == NULL)
+		return (NULL);
 	stock_space(infos, &space, ls_opt);
 	check_tri(infos, ls_opt);
 	stock_index(infos, ls_opt, &space);
@@ -111,7 +116,6 @@ int			main(int argc, char **argv)
 			ft_ls(name, &ls_opt);
 	}
 	else
-	{
 		while (first < argc)
 		{
 			name = ft_strjoin(argv[first], "/");
@@ -121,6 +125,5 @@ int			main(int argc, char **argv)
 				ft_ls(name, &ls_opt);
 			first++;
 		}
-	}
 	return (0);
 }

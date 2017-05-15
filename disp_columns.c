@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 19:01:22 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/13 19:46:45 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/15 15:05:02 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ int			disp_once(struct s_infos *infos, struct s_space *space,
 						struct s_lsopt *ls_opt)
 {
 	if (ls_opt->s > 0)
-		disp_block(infos->stats, space);
-	disp_name(infos);
+//		disp_block(infos->stats, space);
+		ft_putnbr(space->name);
+		disp_name(infos);
 	ft_put_nb_c(' ', space->name - ft_strlen(infos->name) + 1);
 	return (1);
 }
@@ -40,7 +41,7 @@ void		disp_colname(struct s_infos *infos, struct s_space *space,
 		}
 		var_col->i++;
 		infos = infos->next;
-		if (var_col->c == var_col->max_col ||
+		if ((var_col->c == var_col->max_col && var_col->n < space->nb_files) ||
 			(infos == NULL && var_col->n < space->nb_files))
 		{
 			var_col->c = 0;
