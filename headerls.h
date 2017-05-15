@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 01:50:57 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/13 19:45:40 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/15 16:56:19 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ void				tri_ascii(struct s_infos *infos, struct s_lsopt *ls_opt);
 void				list_swap(struct s_infos *infos);
 
 void				*open_error(char *name);
+
+void				arg_error(char arg);
 
 void				disp_l(struct s_infos *infos, struct s_space *space,
 							struct s_lsopt *ls_opt);

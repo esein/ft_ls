@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/15 15:44:27 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/15 17:13:37 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/15 17:35:21 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ int				stock_arg(int argc, char **argv, struct s_lsopt *ls_opt)
 		int		j;
 
 		i = 1;
-		j = 1;
 		init_arg(ls_opt);
 		while (i < argc)
 		{
+			j = 1;
 			if (argv[i][0] == '-' && argv[i][1])
 			{
 				while (argv[i][j])

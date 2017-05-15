@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 16:40:57 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/15 17:10:28 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/15 19:09:42 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void		*open_error(char *name)
 {
 	if (errno == ENOTDIR)
 	{
-		ft_putstr(ft_str_endcut(name, 1));
-		ft_putchar('\n');
+		ft_puterror(ft_str_endcut(name, 1));
+		ft_putcharerror('\n');
 		return (0);
 	}
 	name = ft_str_endcut(name, 1);

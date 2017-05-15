@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 01:50:17 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/13 20:55:06 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/15 19:11:06 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ struct s_infos	*ft_ls(char *name, struct s_lsopt *ls_opt)
 	infos = addinfo();
 	actual = infos;
 	if (!(dir = opendir(name)))
-		return(open_error(name));
+		return (open_error(name));
 	stock_infos(dir, infos, name, ls_opt);
 	if (infos->stats == NULL)
 		return (NULL);
@@ -49,24 +49,6 @@ struct s_infos	*ft_ls(char *name, struct s_lsopt *ls_opt)
 	stock_index(infos, ls_opt, &space);
 	if (ls_opt->l > 0 || ls_opt->s > 0)
 		disp_total(&space);
-/*	while (actual != NULL)
-	{
-		if (ls_opt->a == 0 && actual->name[0] == '.')
-			actual = actual->next;
-		else
-		{
-			if (ls_opt->l > 0)
-				disp_l(actual, &space, ls_opt);
-			else if (ls_opt->one > 0)
-				disp_simple(actual, &space, ls_opt);
-			else
-			{
-				disp_columns(actual, &space, ls_opt);
-				break;
-			}
-			actual = actual->next;
-		}
-	}*/
 	if (ls_opt->l > 0 || ls_opt->one > 0)
 		disp_list(infos, &space, ls_opt);
 	else
@@ -75,30 +57,40 @@ struct s_infos	*ft_ls(char *name, struct s_lsopt *ls_opt)
 	return (infos);
 }
 
-/*int			ls_R(char *name, struct s_lsopt *ls_opt)
+void		call_ls(char *name, struct s_lsopt *ls_opt)
 {
-	DIR				*dir;
-	struct dirent	*file;
+		if (ls_opt->R == 1)
+			ls_R(name, ls_opt);
+		else
+			ft_ls(name, ls_opt);
+}
 
-	ft_ls(name, ls_opt);
-	if (!(dir = opendir(name)))
-		return (open_error(name));
-	file = readdir(dir);
-	while ((file = readdir(dir)))
-	{
-		if (file->d_name[0] != '.' || ls_opt->a != 0)
-			if (file->d_type == 4 && (ft_strcmp(file->d_name, "."))
-				&& (ft_strcmp(file->d_name, "..")))
+int			files_arg(int argc, char **argv, int first, struct s_lsopt *ls_opt)
+{
+	int		i;
+	DIR		*dir;
+
+	i = first;
+	while (i < argc)
+		{
+			if (!(dir = opendir(ft_strjoin(argv[i], "/"))))
+				open_error(ft_strjoin(argv[i], "/"));
+			else
 			{
-				ft_put_nb_c('\n', 1);
-				ft_putendl(ft_strjoin(name, ft_strjoin(file->d_name, ":")));
-				ls_R(ft_strjoin(name, ft_strjoin(file->d_name, "/")), ls_opt);
+				if ((argc - first) > 1)
+				{
+					ft_putstr(argv[i]);
+					ft_putstr(":\n");
+				}
+				call_ls(ft_strjoin(argv[i], "/"), ls_opt);
 			}
-	}
-	closedir(dir);
+				if ((argc - i) > 1)
+					ft_putchar('\n');
+			i++;
+		}
 	return (0);
 }
-*/
+
 int			main(int argc, char **argv)
 {
 	struct s_lsopt	ls_opt;
@@ -116,14 +108,6 @@ int			main(int argc, char **argv)
 			ft_ls(name, &ls_opt);
 	}
 	else
-		while (first < argc)
-		{
-			name = ft_strjoin(argv[first], "/");
-			if (ls_opt.R == 1)
-				ls_R(name, &ls_opt);
-			else
-				ft_ls(name, &ls_opt);
-			first++;
-		}
+		files_arg(argc, argv, first, &ls_opt);
 	return (0);
 }
