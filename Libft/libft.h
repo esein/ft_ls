@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 05:25:10 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/08 01:01:57 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/15 16:39:16 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ typedef struct		s_list
 }					t_list;
 
 void				ft_putchar(char c);
+
+void				ft_putcharerror(char c);
 
 void				ft_putstr(char const *s);
 

@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_putcharerror.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/11 06:17:36 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/12 11:13:56 by gcadiou          ###   ########.fr       */
+/*   Created: 2017/05/15 16:39:26 by gcadiou           #+#    #+#             */
+/*   Updated: 2017/05/15 16:40:05 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "Libft.h"
 
-void	ft_putstr(char const *s)
+void	ft_putcharerror(char c)
 {
-	int i;
-
-	i = 0;
-	if (s)
-		while (s[i] != '\0')
-		{
-			ft_putchar(s[i]);
-			i++;
-		}
+	write(2, &c, 1);
 }
