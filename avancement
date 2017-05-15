@@ -1,9 +1,4 @@
-gestion d'erreur a faire !
-
-quand plusieurs arguments afficher le nom de l'argument + ':' avant d'afficher les entrees.
-
 check test du filechecker
 
-changer de sortie les puterror
 last :
-gerer erreur mauvais option (arg invalide & afficher usage).
+faire option -G (color)
