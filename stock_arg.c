@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/15 15:44:27 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/15 17:35:21 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/18 16:33:56 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static int			stock_arg3(struct s_lsopt *ls_opt, char c)
 		ls_opt->S = 1;
 	else if (c == 'f')
 		ls_opt->f = 1;
+	else if (c == 'G')
+		ls_opt->G = 1;
 	else
 		return (0);
 	return (1);

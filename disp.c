@@ -6,69 +6,118 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 14:02:50 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/13 20:34:38 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/18 20:20:42 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headerls.h"
 
-
-
-void		disp_name(struct s_infos *infos)
+void		disp_name(struct s_infos *infos, struct s_lsopt *ls_opt)
 {
-	if (S_ISDIR(infos->stats->st_mode))
-		COLOR(S_CYAN);
-	else if (S_ISREG(infos->stats->st_mode) && (infos->stats->st_mode & S_IXUSR
-			|| infos->stats->st_mode & S_IXGRP
-			|| infos->stats->st_mode & S_IXOTH))
-		COLOR(RED);
-	else if (S_ISLNK(infos->stats->st_mode))
+	if (ls_opt->G == 1)
+	{
+	if (S_ISDIR(MODE))
+	{
+		if (MODE & S_IWOTH)
+		{
+			if (MODE & S_ISTXT)
+				COLOR(C_WSDIR);
+			else
+				COLOR(C_WDIR);
+		}
+		else
+			COLOR(C_DIR);
+	}
+	else if (S_ISLNK(MODE))
+		COLOR(C_LNK);
+	else if ((MODE & S_IFMT) == S_IFSOCK)
+		COLOR(C_SOCK);
+	else if ((MODE & S_IFMT) == S_IFIFO)
+		COLOR(C_FIFO);
+	else if (S_ISBLK(MODE))
+		COLOR(C_BLK);
+	else if (S_ISCHR(MODE))
+		COLOR(C_CHR);
+	else if (MODE & (S_IXUSR | S_IXGRP | S_IXOTH))
+	{
+		if (MODE & S_ISUID)
+			COLOR(C_SUID);
+		else if (MODE & S_ISGID)
+			COLOR(C_SGID);
+		else
+			COLOR(C_EXEC);
+	}
+	}
+	ft_putstr(infos->name);
+	if (ls_opt->G == 1)
+		COLOR(NONE);
+}
+/*void		disp_name(struct s_infos *infos, struct s_lsopt *ls_opt)
+{
+	if (ls_opt->G == 1)
+	{
+		if (S_ISDIR(infos->stats->st_mode))
+			COLOR(S_CYAN);
+		else if (S_ISREG(infos->stats->st_mode) &&
+						(infos->stats->st_mode & S_IXUSR
+						|| infos->stats->st_mode & S_IXGRP
+						|| infos->stats->st_mode & S_IXOTH))
+			COLOR(RED);
+		else if (S_ISCHR(infos->stats->st_mode))
+			COLOR(BLUE_B_YELLOW);
+		else if (S_ISBLK(infos->stats->st_mode))
+			COLOR(BLUE_B_CYAN);
+		else if (S_ISLNK(infos->stats->st_mode))
+			COLOR(MAGENTA);
+	}
+	ft_putstr(infos->name);
+	if (ls_opt->G == 1)
+		COLOR(NONE);
+}
+*/
+void		disp_lnk_name(struct s_infos *infos, struct s_lsopt *ls_opt)
+{
+	if (ls_opt->G == 1)
 		COLOR(MAGENTA);
 	ft_putstr(infos->name);
-	COLOR(NONE);
-}
-
-void		disp_lnk_name(struct s_infos *infos)
-{
-	COLOR(MAGENTA);
-	ft_putstr(infos->name);
-	COLOR(NONE);
+	if (ls_opt->G == 1)
+		COLOR(NONE);
 	ft_putstr(" -> ");
 	ft_putstr(infos->lnk_name);
 }
 
 void		disp_simple(struct s_infos *infos, struct s_space *space,
-						struct s_lsopt *ls_opt)
+		struct s_lsopt *ls_opt)
 {
 	if (ls_opt->s > 0)
 	{
 		disp_block(infos->stats, space);
 		ft_putchar(' ');
 	}
-	disp_name(infos);
+	disp_name(infos, ls_opt);
 	ft_putchar('\n');
 }
 
 void		disp_l(struct s_infos *infos, struct s_space *space,
-					struct s_lsopt *ls_opt)
+		struct s_lsopt *ls_opt)
 {
-		if (ls_opt->s > 0)
-			disp_block(infos->stats, space);
-		disp_mode(infos->stats);
-		ft_put_nb_c(' ', 2);
-		disp_divers(infos->stats, space);
-		ft_putstr("  ");
-		disp_time(infos->stats, ls_opt);
-		ft_putchar(' ');
-		if (S_ISLNK(infos->stats->st_mode))
-			disp_lnk_name(infos);
-		else
-			disp_name(infos);
-		ft_putchar('\n');
+	if (ls_opt->s > 0)
+		disp_block(infos->stats, space);
+	disp_mode(infos->stats);
+	ft_put_nb_c(' ', 2);
+	disp_divers(infos->stats, space);
+	ft_putstr("  ");
+	disp_time(infos->stats, ls_opt);
+	ft_putchar(' ');
+	if (S_ISLNK(infos->stats->st_mode))
+		disp_lnk_name(infos, ls_opt);
+	else
+		disp_name(infos, ls_opt);
+	ft_putchar('\n');
 }
 
 void	disp_list(struct s_infos *infos, struct s_space *space,
-					struct s_lsopt *ls_opt)
+		struct s_lsopt *ls_opt)
 {
 	while (infos != NULL)
 	{

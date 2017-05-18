@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 19:01:22 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/15 15:05:02 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/18 17:11:17 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@ int			disp_once(struct s_infos *infos, struct s_space *space,
 						struct s_lsopt *ls_opt)
 {
 	if (ls_opt->s > 0)
-//		disp_block(infos->stats, space);
-		ft_putnbr(space->name);
-		disp_name(infos);
+		disp_block(infos->stats, space);
+	disp_name(infos, ls_opt);
 	ft_put_nb_c(' ', space->name - ft_strlen(infos->name) + 1);
 	return (1);
 }

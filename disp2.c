@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 18:08:36 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/12 16:55:39 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/18 19:16:04 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,12 @@ void		disp_divers(struct stat *stats, struct s_space *space)
 	ft_put_nb_c(' ', space->nlink - ft_intlen(stats->st_nlink));
 	ft_putnbr(stats->st_nlink);
 	ft_putchar(' ');
-	ft_put_nb_c(' ', space->usr -
-			ft_strlen(getpwuid(stats->st_uid)->pw_name));
 	ft_putstr(getpwuid(stats->st_uid)->pw_name);
-	ft_putstr("  ");
+	ft_put_nb_c(' ', (space->usr -
+			ft_strlen(getpwuid(stats->st_uid)->pw_name)) + 2);
+	ft_putstr(getgrgid(stats->st_gid)->gr_name);
 	ft_put_nb_c(' ', space->grp -
 			ft_strlen(getgrgid(stats->st_gid)->gr_name));
-	ft_putstr(getgrgid(stats->st_gid)->gr_name);
 	ft_putchar(' ');
 	ft_put_nb_c(' ', space->size - ft_intlen(stats->st_size));
 	ft_putnbr(stats->st_size);
@@ -75,7 +74,7 @@ void		disp_time(struct stat *stats, struct s_lsopt *ls_opt)
 		if (time(0) - sixmonths > stats->st_atime || stats->st_atime > time(0))
 		{
 			ft_putstr_size(ft_strcut(ctime(&(stats->st_atime)), 4, 11), 24);
-			ft_strcut(ctime(&(stats->st_atime)), 19, 24);
+			ft_putstr(ft_strcut(ctime(&(stats->st_atime)), 19, 24));
 		}
 		else
 			ft_putstr_size(ft_strcut(ctime(&(stats->st_atime)), 4, 16), 24);
@@ -85,7 +84,7 @@ void		disp_time(struct stat *stats, struct s_lsopt *ls_opt)
 		if (time(0) - sixmonths > stats->st_mtime || stats->st_mtime > time(0))
 		{
 			ft_putstr_size(ft_strcut(ctime(&(stats->st_mtime)), 4, 11), 24);
-			ft_strcut(ctime(&(stats->st_mtime)), 19, 24);
+			ft_putstr(ft_strcut(ctime(&(stats->st_mtime)), 19, 24));
 		}
 		else
 			ft_putstr_size(ft_strcut(ctime(&(stats->st_mtime)), 4, 16), 24);

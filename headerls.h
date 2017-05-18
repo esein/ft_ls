@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 01:50:57 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/15 16:56:19 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/18 20:20:44 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,19 @@
 # include <sys/ioctl.h>
 
 # define FILE_SIZE stats->st_size
+# define MODE infos->stats->st_mode
+
+# define C_DIR S_CYAN
+# define C_LNK MAGENTA
+# define C_SOCK GREEN
+# define C_FIFO BROWN
+# define C_EXEC RED
+# define C_BLK BLUE_B_CYAN
+# define C_CHR BLUE_B_BROWN
+# define C_SUID BLACK_B_RED
+# define C_SGID BLACK_B_CYAN
+# define C_WSDIR BLACK_B_GREEN
+# define C_WDIR BLACK_B_BROWN
 
 struct	s_varcol
 {
@@ -39,16 +52,17 @@ struct	s_varcol
 
 struct	s_lsopt
 {
-	char	one;
-	char	l;
-	char	R;
-	char	a;
-	char	r;
-	char	t;
-	char	u;
-	char	s;
-	char	S;
-	char	f;
+	int	one;
+	int	l;
+	int	R;
+	int	a;
+	int	r;
+	int	t;
+	int	u;
+	int	s;
+	int	S;
+	int	f;
+	int	G;
 };
 
 struct	s_space
@@ -75,11 +89,11 @@ struct	s_infos
 void				disp_list(struct s_infos *infos, struct s_space *space,
 					struct s_lsopt *ls_opt);
 
-void				disp_name(struct s_infos *infos);
+void				disp_name(struct s_infos *infos, struct s_lsopt *ls_opt);
 
 void				disp_block(struct stat *stats, struct s_space *space);
 
-int				disp_columns(struct s_infos *infos, struct s_space *space,
+int					disp_columns(struct s_infos *infos, struct s_space *space,
 								struct s_lsopt *ls_opt);
 
 void				disp_time(struct stat *stats, struct s_lsopt *ls_opt);

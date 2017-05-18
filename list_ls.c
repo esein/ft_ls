@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 09:07:05 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/09 07:57:28 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/18 16:36:09 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void				init_arg(struct s_lsopt *ls_opt)
 	ls_opt->s = 0;
 	ls_opt->S = 0;
 	ls_opt->f = 0;
+	ls_opt->G = 0;
 }
 
 void				list_swap(struct s_infos *infos)
