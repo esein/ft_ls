@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 14:02:50 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/18 20:20:42 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/22 20:02:28 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,65 +16,43 @@ void		disp_name(struct s_infos *infos, struct s_lsopt *ls_opt)
 {
 	if (ls_opt->G == 1)
 	{
-	if (S_ISDIR(MODE))
-	{
-		if (MODE & S_IWOTH)
+		if (S_ISDIR(MODE))
 		{
-			if (MODE & S_ISTXT)
-				COLOR(C_WSDIR);
+			if (MODE & S_IWOTH)
+			{
+				if (MODE & S_ISTXT)
+					COLOR(C_WSDIR);
+				else
+					COLOR(C_WDIR);
+			}
 			else
-				COLOR(C_WDIR);
+				COLOR(C_DIR);
 		}
-		else
-			COLOR(C_DIR);
-	}
-	else if (S_ISLNK(MODE))
-		COLOR(C_LNK);
-	else if ((MODE & S_IFMT) == S_IFSOCK)
-		COLOR(C_SOCK);
-	else if ((MODE & S_IFMT) == S_IFIFO)
-		COLOR(C_FIFO);
-	else if (S_ISBLK(MODE))
-		COLOR(C_BLK);
-	else if (S_ISCHR(MODE))
-		COLOR(C_CHR);
-	else if (MODE & (S_IXUSR | S_IXGRP | S_IXOTH))
-	{
-		if (MODE & S_ISUID)
-			COLOR(C_SUID);
-		else if (MODE & S_ISGID)
-			COLOR(C_SGID);
-		else
-			COLOR(C_EXEC);
-	}
+		else if (S_ISLNK(MODE))
+			COLOR(C_LNK);
+		else if ((MODE & S_IFMT) == S_IFSOCK)
+			COLOR(C_SOCK);
+		else if ((MODE & S_IFMT) == S_IFIFO)
+			COLOR(C_FIFO);
+		else if (S_ISBLK(MODE))
+			COLOR(C_BLK);
+		else if (S_ISCHR(MODE))
+			COLOR(C_CHR);
+		else if (MODE & (S_IXUSR | S_IXGRP | S_IXOTH))
+		{
+			if (MODE & S_ISUID)
+				COLOR(C_SUID);
+			else if (MODE & S_ISGID)
+				COLOR(C_SGID);
+			else
+				COLOR(C_EXEC);
+		}
 	}
 	ft_putstr(infos->name);
 	if (ls_opt->G == 1)
 		COLOR(NONE);
 }
-/*void		disp_name(struct s_infos *infos, struct s_lsopt *ls_opt)
-{
-	if (ls_opt->G == 1)
-	{
-		if (S_ISDIR(infos->stats->st_mode))
-			COLOR(S_CYAN);
-		else if (S_ISREG(infos->stats->st_mode) &&
-						(infos->stats->st_mode & S_IXUSR
-						|| infos->stats->st_mode & S_IXGRP
-						|| infos->stats->st_mode & S_IXOTH))
-			COLOR(RED);
-		else if (S_ISCHR(infos->stats->st_mode))
-			COLOR(BLUE_B_YELLOW);
-		else if (S_ISBLK(infos->stats->st_mode))
-			COLOR(BLUE_B_CYAN);
-		else if (S_ISLNK(infos->stats->st_mode))
-			COLOR(MAGENTA);
-	}
-	ft_putstr(infos->name);
-	if (ls_opt->G == 1)
-		COLOR(NONE);
-}
-*/
+
 void		disp_lnk_name(struct s_infos *infos, struct s_lsopt *ls_opt)
 {
 	if (ls_opt->G == 1)

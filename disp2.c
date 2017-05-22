@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 18:08:36 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/18 19:16:04 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/22 20:28:30 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,33 +60,23 @@ void		disp_divers(struct stat *stats, struct s_space *space)
 	ft_put_nb_c(' ', space->grp -
 			ft_strlen(getgrgid(stats->st_gid)->gr_name));
 	ft_putchar(' ');
-	ft_put_nb_c(' ', space->size - ft_intlen(stats->st_size));
-	ft_putnbr(stats->st_size);
-}
-
-void		disp_time(struct stat *stats, struct s_lsopt *ls_opt)
-{
-	int		sixmonths;
-
-	sixmonths = ((365 / 2) * (3600 * 24));
-	if (ls_opt->u > 0)
-	{
-		if (time(0) - sixmonths > stats->st_atime || stats->st_atime > time(0))
-		{
-			ft_putstr_size(ft_strcut(ctime(&(stats->st_atime)), 4, 11), 24);
-			ft_putstr(ft_strcut(ctime(&(stats->st_atime)), 19, 24));
-		}
-		else
-			ft_putstr_size(ft_strcut(ctime(&(stats->st_atime)), 4, 16), 24);
-	}
+	if (S_ISCHR(stats->st_mode) || S_ISBLK(stats->st_mode))
+		disp_dev(stats, space);
 	else
 	{
-		if (time(0) - sixmonths > stats->st_mtime || stats->st_mtime > time(0))
-		{
-			ft_putstr_size(ft_strcut(ctime(&(stats->st_mtime)), 4, 11), 24);
-			ft_putstr(ft_strcut(ctime(&(stats->st_mtime)), 19, 24));
-		}
+		if (space->majeur == 0)
+			ft_put_nb_c(' ', space->size - ft_intlen(stats->st_size));
 		else
-			ft_putstr_size(ft_strcut(ctime(&(stats->st_mtime)), 4, 16), 24);
+			ft_put_nb_c(' ', (space->majeur + 2 + space->mineur) - space->size);
+		ft_putnbr(stats->st_size);
 	}
+}
+
+void		disp_dev(struct stat *stats, struct s_space *space)
+{
+	ft_put_nb_c(' ', space->majeur - ft_intlen(major(stats->st_rdev)));
+	ft_putnbr(major(stats->st_rdev));
+	ft_putstr(", ");
+	ft_put_nb_c(' ', space->mineur - ft_intlen(minor(stats->st_rdev)));
+	ft_putnbr(minor(stats->st_rdev));
 }
