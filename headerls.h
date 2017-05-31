@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 01:50:57 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/22 19:55:06 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/31 01:18:43 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,16 @@ struct	s_varcol
 struct	s_lsopt
 {
 	int	one;
-	int	l;
+	int	G;
 	int	R;
+	int	S;
 	int	a;
+	int	f;
+	int	l;
 	int	r;
 	int	t;
 	int	u;
 	int	s;
-	int	S;
-	int	f;
-	int	G;
 };
 
 struct	s_space
