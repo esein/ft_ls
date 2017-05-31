@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 01:50:17 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/15 19:11:06 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/31 04:38:12 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,14 @@ int				firstname(int argc, char **argv)
 	{
 		if (argv[i][0] != '-')
 			return (i);
-		i++;
+		else if (argv[i][0] == '-' && argv[i][1] == '-')
+			{
+				if ((i + 1) < argc)
+					return (i + 1);
+				else
+					return (0);
+			}
+				i++;
 	}
 	if (argc > 1)
 		if (argv[1][0] == '-' && argv[1][1] == '\0')
