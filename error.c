@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 16:40:57 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/15 19:09:42 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/31 01:12:14 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	disp_usage()
 {
-	ft_puterror("usage: ls [-1RSaflrstu] [file ...]");
+	ft_puterror("usage: ls [-1GRSaflrstu] [file ...]");
 }
 
 void		*open_error(char *name)
