@@ -6,7 +6,7 @@
 #    By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/09 05:23:59 by gcadiou           #+#    #+#              #
-#    Updated: 2017/05/15 16:40:32 by gcadiou          ###   ########.fr        #
+#    Updated: 2017/06/26 14:29:43 by gcadiou          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,14 +80,22 @@ SRC = ft_atoi.c       \
 	  check_malloc.c        \
 	  get_next_line.c
 
+OBJ = $(SRC:.c=.o)
+
+FLAG = -Wall -Wextra -Werror
+
 all: $(NAME)
 
-$(NAME):
-	gcc -Wall -Werror -Wextra -c $(SRC)
-	ar -rc $(NAME) $(SRC:.c=.o)
+$(NAME): $(OBJ)
+	ar -rc $(NAME) $(OBJ)
+
+$(OBJ): $(SRC)
+	gcc -c $(SRC) $(FLAG)
+
+.PHONY: all clean fclean re
 
 clean:
-	rm -f $(SRC:.c=.o)
+	rm -f $(OBJ)
 
 fclean: clean
 	rm -f $(NAME)

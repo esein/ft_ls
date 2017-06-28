@@ -6,34 +6,46 @@
 #    By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/24 16:55:08 by gcadiou           #+#    #+#              #
-#    Updated: 2017/05/22 19:55:28 by gcadiou          ###   ########.fr        #
+#    Updated: 2017/06/28 18:18:09 by gcadiou          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls
 
-SRC = ls.c  stock.c list_ls.c disp.c error.c disp2.c tri.c opt_R.c disp_columns.c stock_arg.c disp_time.c
+SRC = ls.c           \
+	  stock.c        \
+	  list_ls.c      \
+	  disp.c         \
+	  error.c        \
+	  disp2.c        \
+	  disp3.c        \
+	  tri.c          \
+	  opt_br.c       \
+	  disp_columns.c \
+	  stock_arg.c
 
-PATHLIB = ~/Mygit/ft_ls/Libft/
+OBJ = $(SRC:.c=.o)
+
+PATHLIB = ./Libft
+
+LIB = $(PATHLIB)/libft.a
 
 FLAG = -Wall -Werror -Wextra
 
-all: $(NAME)
+all: compillib $(NAME)
 
-$(NAME):
-	gcc $(SRC) Libft/libft.a -I $(PATHLIB) -o $(NAME) $(FLAG)
+$(NAME): $(LIB) $(SRC)
+	gcc $(SRC) $(LIB) -I $(PATHLIB) -o $(NAME) $(FLAG)
 
 compillib:
-	make -C $(PATHLIB) re
+	make -C $(PATHLIB)
+
+.PHONY: compillib clean fclean re
 
 clean:
-#	rm -f $(SRC:.c=.o)
+	rm -f $(OBJ)
 
 fclean: clean
-#	rm -f a.out
 	rm -f $(NAME)
 
 re: fclean all
-
-go: re
-	./a.out

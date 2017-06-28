@@ -5,16 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/15 02:15:07 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/22 20:09:31 by gcadiou          ###   ########.fr       */
+/*   Created: 2017/06/28 15:12:14 by gcadiou           #+#    #+#             */
+/*   Updated: 2017/06/28 17:07:48 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "headerls.h"
 
-void				stock_space2(struct s_infos *infos, struct s_space *space)
+void			stock_space2(struct s_infos *infos, struct s_space *space,
+							struct s_lsopt *ls_opt)
 {
+	if (ls_opt->a > 0 || infos->name[0] != '.')
+		space->total += infos->stats->st_blocks;
+	if (S_ISCHR(MODE) || S_ISBLK(MODE))
+	{
+		if (space->majeur < ft_intlen(major(infos->stats->st_rdev)))
+			space->majeur = ft_intlen(major(infos->stats->st_rdev));
+		if (space->majeur < ft_intlen(minor(infos->stats->st_rdev)))
+			space->mineur = ft_intlen(minor(infos->stats->st_rdev));
+	}
 	if (space->blocks < ft_intlen(infos->stats->st_blocks))
 		space->blocks = ft_intlen(infos->stats->st_blocks);
 	if (space->nlink < ft_intlen(infos->stats->st_nlink))
@@ -39,7 +48,7 @@ int				stock_space(struct s_infos *infos, struct s_space *space,
 	space->name = ft_strlen(infos->name);
 	if (S_ISCHR(MODE) || S_ISBLK(MODE))
 	{
-	 	space->majeur = ft_intlen(major(infos->stats->st_rdev));
+		space->majeur = ft_intlen(major(infos->stats->st_rdev));
 		space->mineur = ft_intlen(minor(infos->stats->st_rdev));
 	}
 	else
@@ -51,16 +60,7 @@ int				stock_space(struct s_infos *infos, struct s_space *space,
 	{
 		if (space->name < ft_strlen(infos->name))
 			space->name = ft_strlen(infos->name);
-		if (ls_opt->a > 0 || infos->name[0] != '.')
-			space->total += infos->stats->st_blocks;
-		if (S_ISCHR(MODE) || S_ISBLK(MODE))
-		{
-			if (space->majeur < ft_intlen(major(infos->stats->st_rdev)))
-				space->majeur= ft_intlen(major(infos->stats->st_rdev));
-			if (space->majeur < ft_intlen(minor(infos->stats->st_rdev)))
-				space->mineur = ft_intlen(minor(infos->stats->st_rdev));
-		}
-		stock_space2(infos, space);
+		stock_space2(infos, space, ls_opt);
 	}
 	return (0);
 }
@@ -94,7 +94,6 @@ void			stock_lnk_name(struct s_infos *infos, char *path)
 		open_error(path);
 	infos->lnk_name[lnk_len] = '\0';
 }
-
 
 struct s_infos	*stock_infos(DIR *dir, struct s_infos *infos, char *name,
 		struct s_lsopt *ls_opt)

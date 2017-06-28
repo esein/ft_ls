@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 01:50:57 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/31 01:18:43 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/06/28 17:31:38 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # define C_WSDIR BLACK_B_GREEN
 # define C_WDIR BLACK_B_BROWN
 
-struct	s_varcol
+struct				s_varcol
 {
 	int	i;
 	int l;
@@ -50,12 +50,12 @@ struct	s_varcol
 	int	max_col;
 };
 
-struct	s_lsopt
+struct				s_lsopt
 {
 	int	one;
-	int	G;
-	int	R;
-	int	S;
+	int	bg;
+	int	br;
+	int	bs;
 	int	a;
 	int	f;
 	int	l;
@@ -65,7 +65,7 @@ struct	s_lsopt
 	int	s;
 };
 
-struct	s_space
+struct				s_space
 {
 	int		blocks;
 	int		nlink;
@@ -79,7 +79,7 @@ struct	s_space
 	int		mineur;
 };
 
-struct	s_infos
+struct				s_infos
 {
 	int				index;
 	char			*name;
@@ -147,7 +147,7 @@ void				stock_index(struct s_infos *infos, struct s_lsopt *ls_opt,
 
 int					stock_arg(int argc, char **argv, struct s_lsopt *ls_opt);
 
-int					ls_R(char *name, struct s_lsopt *ls_opt);
+int					ls_br(char *name, struct s_lsopt *ls_opt);
 
 struct s_infos		*ft_ls(char *name, struct s_lsopt *ls_opt);
 #endif

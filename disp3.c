@@ -1,16 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   disp_time.c                                        :+:      :+:    :+:   */
+/*   disp3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/05/22 19:01:12 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/22 19:01:58 by gcadiou          ###   ########.fr       */
+/*   Created: 2017/06/28 18:57:21 by gcadiou           #+#    #+#             */
+/*   Updated: 2017/06/28 18:57:23 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headerls.h"
+
+void		disp_block(struct stat *stats, struct s_space *space)
+{
+	ft_put_nb_c(' ', space->blocks - ft_intlen(stats->st_blocks));
+	ft_putnbr(stats->st_blocks);
+	ft_putchar(' ');
+}
 
 void		disp_time(struct stat *stats, struct s_lsopt *ls_opt)
 {

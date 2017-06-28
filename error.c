@@ -6,13 +6,13 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 16:40:57 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/31 01:12:14 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/06/28 17:17:23 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headerls.h"
 
-static void	disp_usage()
+static void	disp_usage(void)
 {
 	ft_puterror("usage: ls [-1GRSaflrstu] [file ...]");
 }

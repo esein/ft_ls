@@ -6,10 +6,9 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 01:50:17 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/31 04:38:12 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/06/28 17:29:23 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "headerls.h"
 
@@ -23,18 +22,18 @@ int				firstname(int argc, char **argv)
 		if (argv[i][0] != '-')
 			return (i);
 		else if (argv[i][0] == '-' && argv[i][1] == '-')
-			{
-				if ((i + 1) < argc)
-					return (i + 1);
-				else
-					return (0);
-			}
-				i++;
+		{
+			if ((i + 1) < argc)
+				return (i + 1);
+			else
+				return (0);
+		}
+		i++;
 	}
 	if (argc > 1)
 		if (argv[1][0] == '-' && argv[1][1] == '\0')
 			return (1);
-		return (0);
+	return (0);
 }
 
 struct s_infos	*ft_ls(char *name, struct s_lsopt *ls_opt)
@@ -64,41 +63,42 @@ struct s_infos	*ft_ls(char *name, struct s_lsopt *ls_opt)
 	return (infos);
 }
 
-void		call_ls(char *name, struct s_lsopt *ls_opt)
+void			call_ls(char *name, struct s_lsopt *ls_opt)
 {
-		if (ls_opt->R == 1)
-			ls_R(name, ls_opt);
-		else
-			ft_ls(name, ls_opt);
+	if (ls_opt->br == 1)
+		ls_br(name, ls_opt);
+	else
+		ft_ls(name, ls_opt);
 }
 
-int			files_arg(int argc, char **argv, int first, struct s_lsopt *ls_opt)
+int				files_arg(int argc, char **argv, int first,
+							struct s_lsopt *ls_opt)
 {
 	int		i;
 	DIR		*dir;
 
 	i = first;
 	while (i < argc)
+	{
+		if (!(dir = opendir(ft_strjoin(argv[i], "/"))))
+			open_error(ft_strjoin(argv[i], "/"));
+		else
 		{
-			if (!(dir = opendir(ft_strjoin(argv[i], "/"))))
-				open_error(ft_strjoin(argv[i], "/"));
-			else
+			if ((argc - first) > 1)
 			{
-				if ((argc - first) > 1)
-				{
-					ft_putstr(argv[i]);
-					ft_putstr(":\n");
-				}
-				call_ls(ft_strjoin(argv[i], "/"), ls_opt);
+				ft_putstr(argv[i]);
+				ft_putstr(":\n");
 			}
-				if ((argc - i) > 1)
-					ft_putchar('\n');
-			i++;
+			call_ls(ft_strjoin(argv[i], "/"), ls_opt);
 		}
+		if ((argc - i) > 1)
+			ft_putchar('\n');
+		i++;
+	}
 	return (0);
 }
 
-int			main(int argc, char **argv)
+int				main(int argc, char **argv)
 {
 	struct s_lsopt	ls_opt;
 	char			*name;
@@ -109,8 +109,8 @@ int			main(int argc, char **argv)
 	if (first == 0)
 	{
 		name = ft_strdup("./");
-		if (ls_opt.R == 1)
-			ls_R(name, &ls_opt);
+		if (ls_opt.br == 1)
+			ls_br(name, &ls_opt);
 		else
 			ft_ls(name, &ls_opt);
 	}

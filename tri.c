@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 20:06:29 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/15 17:18:06 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/06/28 17:19:56 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void		check_tri(struct s_infos *infos, struct s_lsopt *ls_opt)
 	if (ls_opt->f == 0)
 	{
 		tri_ascii(infos, ls_opt);
-		if (ls_opt->S > 0)
+		if (ls_opt->bs > 0)
 			tri_size(infos, ls_opt);
 		else if (ls_opt->t > 0)
 		{

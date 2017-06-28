@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 05:25:10 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/15 16:39:16 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/05/18 19:55:23 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,45 @@
 
 # define BLACK		"\033[30m"
 # define S_BLACK	"\033[30;1m"
+# define BLACK_B_WHITE		"\033[30;47m"
+# define BLACK_B_RED		"\033[30;41m"
+# define BLACK_B_GREEN		"\033[30;42m"
+# define BLACK_B_BROWN		"\033[30;43m"
+# define BLACK_B_CYAN		"\033[30;46m"
+# define S_BLACK_B_WHITE	"\033[30;47;1m"
 
 # define RED		"\033[31m"
 # define S_RED		"\033[31;1m"
+# define RED_B_WHITE		"\033[31;47m"
+# define S_RED_B_WHITE		"\033[31;47;1m"
 
 # define GREEN		"\033[32m"
 # define S_GREEN	"\033[32;1m"
+# define GREEN_B_WHITE		"\033[32;47m"
+# define S_GREEN_B_WHITE	"\033[32;47;1m"
 
 # define BROWN		"\033[33m"
 # define S_BROWN	"\033[33;1m"
+# define BROWN_B_WHITE		"\033[33;47m"
+# define S_BROWN_B_WHITE	"\033[33;47;1m"
 
 # define BLUE		"\033[34m"
 # define S_BLUE		"\033[34;1m"
+# define BLUE_B_WHITE		"\033[34;47m"
+# define BLUE_B_BROWN		"\033[34;43m"
+# define BLUE_B_CYAN		"\033[34;46m"
+# define S_BLUE_B_WHITE		"\033[34;47;1m"
+# define S_BLUE_B_BROWN	"\033[34;43;1m"
 
 # define MAGENTA	"\033[35m"
 # define S_MAGENTA	"\033[35;1m"
+# define MAGENTA_B_WHITE	"\033[35;47m"
+# define S_MAGENTA_B_WHITE	"\033[35;47;1m"
 
 # define CYAN		"\033[36m"
 # define S_CYAN		"\033[36;1m"
+# define CYAN_B_WHITE		"\033[36;47m"
+# define S_CYAN_B_WHITE		"\033[36;47;1m"
 
 # define WHITE		"\033[37m"
 # define S_WHITE	"\033[37;1m"

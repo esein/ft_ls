@@ -5,25 +5,26 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/21 18:08:36 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/22 20:28:30 by gcadiou          ###   ########.fr       */
+/*   Created: 2017/06/28 18:15:40 by gcadiou           #+#    #+#             */
+/*   Updated: 2017/06/28 18:52:59 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headerls.h"
-
-void		disp_block(struct stat *stats, struct s_space *space)
-{
-	ft_put_nb_c(' ', space->blocks - ft_intlen(stats->st_blocks));
-	ft_putnbr(stats->st_blocks);
-	ft_putchar(' ');
-}
 
 void		disp_total(struct s_space *space)
 {
 	ft_putstr("total ");
 	ft_putnbr(space->total);
 	ft_putchar('\n');
+}
+
+void		disp_mode2(struct stat *infos)
+{
+	if (infos->st_mode & S_ISTXT)
+		ft_putchar((infos->st_mode & S_IXOTH) ? 't' : 'T');
+	else
+		ft_putchar((infos->st_mode & S_IXOTH) ? 'x' : '-');
 }
 
 void		disp_mode(struct stat *infos)
@@ -37,15 +38,19 @@ void		disp_mode(struct stat *infos)
 	ft_putchar(S_ISFIFO(infos->st_mode) ? 'p' : '\0');
 	ft_putchar((infos->st_mode & S_IRUSR) ? 'r' : '-');
 	ft_putchar((infos->st_mode & S_IWUSR) ? 'w' : '-');
-	ft_putchar((infos->st_mode & S_IXUSR) ? ((infos->st_mode & S_ISUID) ? 's' :
-			'x') : (infos->st_mode & S_ISUID) ? 'S' : '-');
+	if (infos->st_mode & S_IXUSR)
+		ft_putchar((infos->st_mode & S_ISUID) ? 's' : 'x');
+	else
+		ft_putchar((infos->st_mode & S_ISUID) ? 'S' : '-');
 	ft_putchar((infos->st_mode & S_IRGRP) ? 'r' : '-');
 	ft_putchar((infos->st_mode & S_IWGRP) ? 'w' : '-');
-	ft_putchar((infos->st_mode & S_IXGRP) ? ((infos->st_mode & S_ISGID) ? 's' :
-			'x') : (infos->st_mode & S_ISGID) ? 'S' : '-');
+	if (infos->st_mode & S_IXGRP)
+		ft_putchar((infos->st_mode & S_ISGID) ? 's' : 'x');
+	else
+		ft_putchar((infos->st_mode & S_ISGID) ? 'S' : '-');
 	ft_putchar((infos->st_mode & S_IROTH) ? 'r' : '-');
 	ft_putchar((infos->st_mode & S_IWOTH) ? 'w' : '-');
-	ft_putchar((infos->st_mode & S_IXOTH) ? 'x' : '-');
+	disp_mode2(infos);
 }
 
 void		disp_divers(struct stat *stats, struct s_space *space)
@@ -59,7 +64,7 @@ void		disp_divers(struct stat *stats, struct s_space *space)
 	ft_putstr(getgrgid(stats->st_gid)->gr_name);
 	ft_put_nb_c(' ', space->grp -
 			ft_strlen(getgrgid(stats->st_gid)->gr_name));
-	ft_putchar(' ');
+	ft_putstr("  ");
 	if (S_ISCHR(stats->st_mode) || S_ISBLK(stats->st_mode))
 		disp_dev(stats, space);
 	else

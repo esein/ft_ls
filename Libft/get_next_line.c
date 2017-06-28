@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 17:17:41 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/08 01:18:47 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/06/28 16:09:15 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <fcntl.h>
 #include <stdlib.h>
 
-int		old_to_new(t_gnl *gnl)
+int				old_to_new(t_gnl *gnl)
 {
 	int		i;
 	int		i2;
@@ -25,7 +25,7 @@ int		old_to_new(t_gnl *gnl)
 	i = 0;
 	i2 = 0;
 	check_malloc(gnl->str_new = malloc(sizeof(char) *
-			(1 + ft_strlentil(gnl->str_old, '\n', 0))),"gnl: old_to_new");
+			(1 + ft_strlentil(gnl->str_old, '\n', 0))), "gnl: old_to_new");
 	while (gnl->str_old[i])
 	{
 		if ((gnl->ret = 1) && gnl->str_old[i] == '\n')
@@ -45,7 +45,7 @@ int		old_to_new(t_gnl *gnl)
 	return (0);
 }
 
-int		read_and_add(const int fd, t_gnl *gnl)
+int				read_and_add(const int fd, t_gnl *gnl)
 {
 	char	buf[BUFF_SIZE + 1];
 	int		i;
@@ -64,7 +64,8 @@ int		read_and_add(const int fd, t_gnl *gnl)
 		if (buf[i] == '\n')
 		{
 			i++;
-			check_malloc(gnl->str_old = malloc(sizeof(char) * (ft_strlen(&buf[i]) + 1)),"gnl: read_and_add");
+			check_malloc(gnl->str_old = malloc(sizeof(char) *
+						(ft_strlen(&buf[i]) + 1)), "gnl: read_and_add");
 			ft_strcpy(gnl->str_old, &buf[i]);
 			return (1);
 		}
@@ -72,7 +73,7 @@ int		read_and_add(const int fd, t_gnl *gnl)
 	return (ret);
 }
 
-int		wicheone(int fd, t_gnl **gnl)
+int				wicheone(int fd, t_gnl **gnl)
 {
 	int		i;
 
@@ -96,12 +97,13 @@ int		wicheone(int fd, t_gnl **gnl)
 
 static	void	vivelanorme2(t_gnl *gnl)
 {
+	gnl->ret = 0;
 	check_malloc(gnl->str_new = (char *)malloc(sizeof(char)),
 			"gnl: vivelanorme2");
 	gnl->str_new[0] = '\0';
 }
 
-int		get_next_line(const int fd, char **line)
+int				get_next_line(const int fd, char **line)
 {
 	static t_gnl	*gnl = NULL;
 	int				act;
@@ -116,7 +118,6 @@ int		get_next_line(const int fd, char **line)
 		gnl[0].fd = fd;
 	}
 	act = wicheone(fd, &gnl);
-	gnl[act].ret = 0;
 	vivelanorme2(&(gnl[act]));
 	if (gnl[act].notfirst == 1)
 		if (old_to_new(&(gnl[act])))

@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/03 19:01:22 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/18 17:11:17 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/06/28 17:17:08 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void		disp_colname(struct s_infos *infos, struct s_space *space,
 	}
 }
 
-int		disp_columns(struct s_infos *infos, struct s_space *space,
+int			disp_columns(struct s_infos *infos, struct s_space *space,
 			struct s_lsopt *ls_opt)
 {
 	struct winsize	ws;

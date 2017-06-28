@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 09:07:05 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/18 16:36:09 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/06/28 17:31:03 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ void				init_arg(struct s_lsopt *ls_opt)
 {
 	ls_opt->one = 0;
 	ls_opt->l = 0;
-	ls_opt->R = 0;
+	ls_opt->br = 0;
 	ls_opt->a = 0;
 	ls_opt->r = 0;
 	ls_opt->t = 0;
 	ls_opt->u = 0;
 	ls_opt->s = 0;
-	ls_opt->S = 0;
+	ls_opt->bs = 0;
 	ls_opt->f = 0;
-	ls_opt->G = 0;
+	ls_opt->bg = 0;
 }
 
 void				list_swap(struct s_infos *infos)
@@ -46,13 +46,13 @@ void				list_swap(struct s_infos *infos)
 
 void				info_init(struct s_infos *infos)
 {
-		infos->next = NULL;
-		infos->name = NULL;
-		infos->stats = NULL;
-		infos->lnk_name = NULL;
+	infos->next = NULL;
+	infos->name = NULL;
+	infos->stats = NULL;
+	infos->lnk_name = NULL;
 }
 
-struct s_infos		*addinfo()
+struct s_infos		*addinfo(void)
 {
 	struct s_infos		*new;
 
