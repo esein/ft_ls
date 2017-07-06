@@ -6,7 +6,7 @@
 #    By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/24 16:55:08 by gcadiou           #+#    #+#              #
-#    Updated: 2017/06/28 18:18:09 by gcadiou          ###   ########.fr        #
+#    Updated: 2017/07/06 09:10:33 by gcadiou          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRC = ls.c           \
 	  tri.c          \
 	  opt_br.c       \
 	  disp_columns.c \
-	  stock_arg.c
+	  stock_arg.c    \
+	  stock_space.c
 
 OBJ = $(SRC:.c=.o)
 

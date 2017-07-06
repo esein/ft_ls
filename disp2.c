@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 18:15:40 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/06/28 18:52:59 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/07/06 09:08:45 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,16 @@ void		disp_divers(struct stat *stats, struct s_space *space)
 	ft_put_nb_c(' ', space->nlink - ft_intlen(stats->st_nlink));
 	ft_putnbr(stats->st_nlink);
 	ft_putchar(' ');
-	ft_putstr(getpwuid(stats->st_uid)->pw_name);
-	ft_put_nb_c(' ', (space->usr -
-			ft_strlen(getpwuid(stats->st_uid)->pw_name)) + 2);
-	ft_putstr(getgrgid(stats->st_gid)->gr_name);
-	ft_put_nb_c(' ', space->grp -
-			ft_strlen(getgrgid(stats->st_gid)->gr_name));
+	ft_putstr((getpwuid(stats->st_uid)) ? getpwuid(stats->st_uid)->pw_name
+										: ft_itoa(stats->st_uid));
+	ft_put_nb_c(' ', 2 + ((getpwuid(stats->st_uid)) ?
+			(space->usr - ft_strlen(getpwuid(stats->st_uid)->pw_name)) :
+			(space->usr - ft_intlen(stats->st_uid))));
+	ft_putstr((getgrgid(stats->st_gid)) ? getgrgid(stats->st_gid)->gr_name
+										: ft_itoa(stats->st_gid));
+	ft_put_nb_c(' ', (getgrgid(stats->st_gid)) ?
+			(space->grp - ft_strlen(getgrgid(stats->st_gid)->gr_name)) :
+			(space->grp - ft_intlen(stats->st_gid)));
 	ft_putstr("  ");
 	if (S_ISCHR(stats->st_mode) || S_ISBLK(stats->st_mode))
 		disp_dev(stats, space);
