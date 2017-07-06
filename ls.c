@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 01:50:17 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/06/28 17:29:23 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/07/06 10:12:48 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,10 @@ int				main(int argc, char **argv)
 	struct s_lsopt	ls_opt;
 	char			*name;
 	int				first;
+	struct s_infos	*infos;
 
+	infos = 0;
+	name = 0;
 	stock_arg(argc, argv, &ls_opt);
 	first = firstname(argc, argv);
 	if (first == 0)
@@ -112,9 +115,13 @@ int				main(int argc, char **argv)
 		if (ls_opt.br == 1)
 			ls_br(name, &ls_opt);
 		else
-			ft_ls(name, &ls_opt);
+			infos = ft_ls(name, &ls_opt);
 	}
 	else
 		files_arg(argc, argv, first, &ls_opt);
+	if (name)
+		free(name);
+	if (infos)
+		free(infos);
 	return (0);
 }

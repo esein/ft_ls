@@ -6,7 +6,7 @@
 #    By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/24 16:55:08 by gcadiou           #+#    #+#              #
-#    Updated: 2017/07/06 09:10:33 by gcadiou          ###   ########.fr        #
+#    Updated: 2017/07/06 10:19:55 by gcadiou          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,10 @@ compillib:
 
 .PHONY: compillib clean fclean re
 
-clean:
+cleanlib:
+	make clean -C  $(PATHLIB)
+
+clean: cleanlib
 	rm -f $(OBJ)
 
 fclean: clean
