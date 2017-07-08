@@ -6,14 +6,14 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 01:50:57 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/06/28 17:31:38 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/07/08 18:58:21 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADERLS_H
 # define HEADERLS_H
 
-# include "Libft/Libft.h"
+# include "Libft/libft.h"
 # include <dirent.h>
 # include <sys/types.h>
 # include <sys/stat.h>
