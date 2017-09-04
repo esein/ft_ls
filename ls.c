@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 01:50:17 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/07/06 10:12:48 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/09/04 18:41:32 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,10 @@ int				files_arg(int argc, char **argv, int first,
 				ft_putstr(argv[i]);
 				ft_putstr(":\n");
 			}
-			call_ls(ft_strjoin(argv[i], "/"), ls_opt);
+			if (argv[i][0] == '/' && (argv[i][1] == 0))
+				call_ls(argv[i], ls_opt);
+			else
+				call_ls(ft_strjoin(argv[i], "/"), ls_opt);
 		}
 		if ((argc - i) > 1)
 			ft_putchar('\n');
