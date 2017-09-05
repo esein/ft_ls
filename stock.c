@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 15:12:14 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/07/06 06:15:37 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/09/05 18:20:25 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ struct s_infos	*stock_infos(DIR *dir, struct s_infos *infos, char *name,
 		{
 			if (notfirst == 1)
 			{
-				infos->next = addinfo();
+				infos->next = addinfo(infos);
 				infos = infos->next;
 			}
 			notfirst = 1;

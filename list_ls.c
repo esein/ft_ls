@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 09:07:05 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/06/28 17:31:03 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/09/05 18:37:14 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void				info_init(struct s_infos *infos)
 	infos->lnk_name = NULL;
 }
 
-struct s_infos		*addinfo(void)
+struct s_infos		*addinfo(struct s_infos *infos)
 {
 	struct s_infos		*new;
 
@@ -60,5 +60,6 @@ struct s_infos		*addinfo(void)
 	check_malloc(new = (struct s_infos*)malloc(sizeof(struct s_infos)),
 			"ls: addinfo");
 	info_init(new);
+	new->back = infos;
 	return (new);
 }

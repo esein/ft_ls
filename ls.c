@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 01:50:17 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/09/04 18:41:32 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/09/05 21:26:53 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ struct s_infos	*ft_ls(char *name, struct s_lsopt *ls_opt)
 	struct s_infos	*actual;
 	struct s_space	space;
 
-	infos = addinfo();
+	infos = addinfo(NULL);
 	actual = infos;
 	if (!(dir = opendir(name)))
 		return (open_error(name));
@@ -51,7 +51,7 @@ struct s_infos	*ft_ls(char *name, struct s_lsopt *ls_opt)
 	if (infos->stats == NULL)
 		return (NULL);
 	stock_space(infos, &space, ls_opt);
-	check_tri(infos, ls_opt);
+	infos = check_tri(infos, ls_opt);
 	stock_index(infos, ls_opt, &space);
 	if (ls_opt->l > 0 || ls_opt->s > 0)
 		disp_total(&space);

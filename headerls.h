@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 01:50:57 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/07/08 18:58:21 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/09/05 21:26:20 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,13 @@ struct				s_infos
 	char			*lnk_name;
 	struct stat		*stats;
 	struct s_infos	*next;
+	struct s_infos	*back;
 };
 
 void				disp_dev(struct stat *stats, struct s_space *space);
 
 void				disp_list(struct s_infos *infos, struct s_space *space,
-					struct s_lsopt *ls_opt);
+								struct s_lsopt *ls_opt);
 
 void				disp_name(struct s_infos *infos, struct s_lsopt *ls_opt);
 
@@ -104,15 +105,13 @@ void				disp_time(struct stat *stats, struct s_lsopt *ls_opt);
 
 void				init_arg(struct s_lsopt *ls_opt);
 
-void				check_tri(struct s_infos *infos, struct s_lsopt *ls_opt);
+struct s_infos		*check_tri(struct s_infos *infos, struct s_lsopt *ls_opt);
 
 void				tri_atime(struct s_infos *infos, struct s_lsopt *ls_opt);
 
 void				tri_mtime(struct s_infos *infos, struct s_lsopt *ls_opt);
 
 void				tri_size(struct s_infos *infos, struct s_lsopt *ls_opt);
-
-void				tri_ascii(struct s_infos *infos, struct s_lsopt *ls_opt);
 
 void				list_swap(struct s_infos *infos);
 
@@ -131,6 +130,8 @@ void				disp_divers(struct stat *stats, struct s_space *space);
 void				disp_mode(struct stat *stats);
 
 void				disp_total(struct s_space *space);
+
+struct s_infos		*tri_ascii(struct s_infos *infos, struct s_lsopt *ls_opt);
 
 struct s_infos		*addinfo();
 
