@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 20:06:29 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/09/05 21:30:47 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/09/06 21:48:04 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,120 +69,124 @@ struct s_infos	*tri_ascii(struct s_infos *actual, struct s_lsopt *ls_opt)
 	return (first);
 }
 
-/*void		tri_ascii(struct s_infos *infos, struct s_lsopt *ls_opt)
-  {
-  struct s_infos		*first;
-
-  first = infos;
-  if (ls_opt->r > 0)
-  while (infos->next != NULL)
-  {
-  if (ft_strcmp(infos->name, infos->next->name) < 0)
-  {
-  list_swap(infos);
-  infos = first;
-  }
-  else
-  infos = infos->next;
-  }
-  else
-  while (infos->next != NULL)
-  {
-  if (ft_strcmp(infos->name, infos->next->name) > 0)
-  {
-  list_swap(infos);
-  infos = first;
-  }
-  else
-  infos = infos->next;
-  }
-  }
-  */
-void		tri_size(struct s_infos *infos, struct s_lsopt *ls_opt)
+struct s_infos	*tri_size(struct s_infos *actual, struct s_lsopt *ls_opt)
 {
+	struct s_infos		*infos;
 	struct s_infos		*first;
+	struct s_infos		*save;
 
-	first = infos;
-	if (ls_opt->r > 0)
-		while (infos->next != NULL)
+	first = actual;
+	infos = actual->next;
+	while (infos != NULL)
+	{
+		while (actual != NULL)
 		{
-			if (infos->FILE_SIZE > infos->next->FILE_SIZE)
+			if (ls_opt->r == 0)
 			{
-				list_swap(infos);
-				infos = first;
+				if (infos->FILE_SIZE < actual->FILE_SIZE)
+					break;
+				else if (infos->FILE_SIZE == actual->FILE_SIZE &&
+							ft_strcmp(infos->name, actual->name) >= 0)
+					break;
 			}
-			else
-				infos = infos->next;
-		}
-	else
-		while (infos->next != NULL)
-		{
-			if (infos->FILE_SIZE < infos->next->FILE_SIZE)
+			else if (ls_opt->r == 1)
 			{
-				list_swap(infos);
-				infos = first;
+				if (infos->FILE_SIZE > actual->FILE_SIZE)
+					break;
+				else if (infos->FILE_SIZE == actual->FILE_SIZE &&
+							(ft_strcmp(infos->name, actual->name) <= 0))
+					break;
 			}
-			else
-				infos = infos->next;
+			actual = actual->back;
 		}
+		save = infos->next;
+		first = lswap(actual, infos, first);
+		infos = save;
+		if (infos != NULL)
+			actual = infos->back;
+	}
+	return (first);
 }
 
-void		tri_atime(struct s_infos *infos, struct s_lsopt *ls_opt)
+struct s_infos	*tri_atime(struct s_infos *actual, struct s_lsopt *ls_opt)
 {
+	struct s_infos		*infos;
 	struct s_infos		*first;
+	struct s_infos		*save;
 
-	first = infos;
-	if (ls_opt->r > 0)
-		while (infos->next != NULL)
+	first = actual;
+	infos = actual->next;
+	while (infos != NULL)
+	{
+		while (actual != NULL)
 		{
-			if (infos->stats->st_atime > infos->next->stats->st_atime)
+			if (ls_opt->r == 0)
 			{
-				list_swap(infos);
-				infos = first;
+				if (infos->stats->st_atime < actual->stats->st_atime)
+					break;
+			else if (infos->stats->st_atime == actual->stats->st_atime &&
+						ft_strcmp(infos->name, actual->name) >= 0)
+				break;
 			}
-			else
-				infos = infos->next;
-		}
-	else
-		while (infos->next != NULL)
-		{
-			if (infos->stats->st_atime < infos->next->stats->st_atime)
+			else if (ls_opt->r == 1)
 			{
-				list_swap(infos);
-				infos = first;
+				if (infos->stats->st_atime > actual->stats->st_atime)
+					break;
+				else if (infos->stats->st_atime == actual->stats->st_atime &&
+						(ft_strcmp(infos->name, actual->name) <= 0))
+					break;
 			}
-			else
-				infos = infos->next;
+					actual = actual->back;
 		}
+		save = infos->next;
+		first = lswap(actual, infos, first);
+		infos = save;
+		if (infos != NULL)
+			actual = infos->back;
+	}
+	return (first);
 }
 
-void		tri_mtime(struct s_infos *infos, struct s_lsopt *ls_opt)
+struct s_infos	*tri_mtime(struct s_infos *actual, struct s_lsopt *ls_opt)
 {
+	struct s_infos		*infos;
 	struct s_infos		*first;
+	struct s_infos		*save;
 
-	first = infos;
-	if (ls_opt->r > 0)
-		while (infos->next != NULL)
+	first = actual;
+	infos = actual->next;
+	while (infos != NULL)
+	{
+		while (actual != NULL)
 		{
-			if (infos->stats->st_mtime > infos->next->stats->st_mtime)
+			if (ls_opt->r == 0)
 			{
-				list_swap(infos);
-				infos = first;
+				if (infos->stats->st_mtime < actual->stats->st_mtime)
+					break;
+				else if (infos->stats->st_mtime == actual->stats->st_mtime &&
+							ft_strcmp(infos->name, actual->name) >= 0)
+					break;
+			}
+			else if (ls_opt->r == 1)
+			{
+				if (infos->stats->st_mtime > actual->stats->st_mtime)
+					break;
+				else if (infos->stats->st_mtime == actual->stats->st_mtime &&
+							ft_strcmp(infos->name, actual->name) >= 0)
+					break;
 			}
 			else
-				infos = infos->next;
+				if (ls_opt->r == 1)
+					break;
+			actual = actual->back;
 		}
-	else
-		while (infos->next != NULL)
-		{
-			if (infos->stats->st_mtime < infos->next->stats->st_mtime)
-			{
-				list_swap(infos);
-				infos = first;
-			}
-			else
-				infos = infos->next;
-		}
+		save = infos->next;
+		first = lswap(actual, infos, first);
+		infos = save;
+		if (infos != NULL)
+			actual = infos->back;
+	}
+	return (first);
 }
 
 struct s_infos	*check_tri(struct s_infos *infos, struct s_lsopt *ls_opt)
@@ -191,13 +195,13 @@ struct s_infos	*check_tri(struct s_infos *infos, struct s_lsopt *ls_opt)
 	{
 		infos = tri_ascii(infos, ls_opt);
 		if (ls_opt->bs > 0)
-			tri_size(infos, ls_opt);
+			infos = tri_size(infos, ls_opt);
 		else if (ls_opt->t > 0)
 		{
 			if (ls_opt->u > 0)
-				tri_atime(infos, ls_opt);
+				infos = tri_atime(infos, ls_opt);
 			else
-				tri_mtime(infos, ls_opt);
+				infos = tri_mtime(infos, ls_opt);
 		}
 	}
 	return (infos);
