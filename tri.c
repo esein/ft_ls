@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/21 20:06:29 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/09/06 21:48:04 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/09/06 21:50:12 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,6 @@ struct s_infos	*check_tri(struct s_infos *infos, struct s_lsopt *ls_opt)
 {
 	if (ls_opt->f == 0)
 	{
-		infos = tri_ascii(infos, ls_opt);
 		if (ls_opt->bs > 0)
 			infos = tri_size(infos, ls_opt);
 		else if (ls_opt->t > 0)
@@ -203,6 +202,8 @@ struct s_infos	*check_tri(struct s_infos *infos, struct s_lsopt *ls_opt)
 			else
 				infos = tri_mtime(infos, ls_opt);
 		}
+		else
+			infos = tri_ascii(infos, ls_opt);
 	}
 	return (infos);
 }
