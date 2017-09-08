@@ -6,11 +6,11 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/15 16:39:26 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/05/15 16:40:05 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/07/06 01:57:43 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Libft.h"
+#include "libft.h"
 
 void	ft_putcharerror(char c)
 {
