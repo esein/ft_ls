@@ -6,12 +6,11 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 15:12:14 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/09/05 18:20:25 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/09/09 17:37:02 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headerls.h"
-
 
 void			stock_index(struct s_infos *infos, struct s_lsopt *ls_opt,
 		struct s_space *space)

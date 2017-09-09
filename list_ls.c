@@ -6,13 +6,39 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 09:07:05 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/09/05 18:37:14 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/09/09 17:41:45 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headerls.h"
 
-void				init_arg(struct s_lsopt *ls_opt)
+struct s_infos	*lswap(struct s_infos *actual, struct s_infos *infos,
+						struct s_infos *first)
+{
+	infos->back->next = infos->next;
+	if (infos->next != NULL)
+	{
+		infos->next->back = infos->back;
+	}
+	if (actual != NULL)
+	{
+		infos->next = actual->next;
+		infos->back = actual;
+		if (actual->next != NULL)
+			actual->next->back = infos;
+		actual->next = infos;
+	}
+	else
+	{
+		infos->next = first;
+		infos->back = NULL;
+		first->back = infos;
+		first = infos;
+	}
+	return (first);
+}
+
+void			init_arg(struct s_lsopt *ls_opt)
 {
 	ls_opt->one = 0;
 	ls_opt->l = 0;
@@ -27,24 +53,7 @@ void				init_arg(struct s_lsopt *ls_opt)
 	ls_opt->bg = 0;
 }
 
-void				list_swap(struct s_infos *infos)
-{
-	char			*name_tmp;
-	char			*lnk_name_tmp;
-	struct stat		*stats_tmp;
-
-	name_tmp = infos->name;
-	lnk_name_tmp = infos->lnk_name;
-	stats_tmp = infos->stats;
-	infos->name = infos->next->name;
-	infos->lnk_name = infos->next->lnk_name;
-	infos->stats = infos->next->stats;
-	infos->next->name = name_tmp;
-	infos->next->lnk_name = lnk_name_tmp;
-	infos->next->stats = stats_tmp;
-}
-
-void				info_init(struct s_infos *infos)
+void			info_init(struct s_infos *infos)
 {
 	infos->next = NULL;
 	infos->name = NULL;
@@ -52,7 +61,7 @@ void				info_init(struct s_infos *infos)
 	infos->lnk_name = NULL;
 }
 
-struct s_infos		*addinfo(struct s_infos *infos)
+struct s_infos	*addinfo(struct s_infos *infos)
 {
 	struct s_infos		*new;
 

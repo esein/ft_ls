@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/15 01:50:57 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/09/06 19:08:31 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/09/09 18:07:19 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,6 @@ void				disp_time(struct stat *stats, struct s_lsopt *ls_opt);
 
 void				init_arg(struct s_lsopt *ls_opt);
 
-void				list_swap(struct s_infos *infos);
-
 void				*open_error(char *name);
 
 void				arg_error(char arg);
@@ -123,15 +121,30 @@ void				disp_mode(struct stat *stats);
 
 void				disp_total(struct s_space *space);
 
-struct s_infos		*tri_ascii(struct s_infos *infos, struct s_lsopt *ls_opt);
+struct s_infos	*lswap(struct s_infos *actual, struct s_infos *infos, 
+						struct s_infos *first);
 
 struct s_infos		*check_tri(struct s_infos *infos, struct s_lsopt *ls_opt);
 
+struct s_infos		*tri_ascii(struct s_infos *infos, struct s_lsopt *ls_opt);
+
+struct s_infos		*utils_tri_ascii(struct s_infos *actual,
+						struct s_infos *infos, struct s_lsopt *ls_opt);
+
 struct s_infos		*tri_atime(struct s_infos *infos, struct s_lsopt *ls_opt);
+
+struct s_infos		*utils_tri_atime(struct s_infos *actual,
+						struct s_infos *infos, struct s_lsopt *ls_opt);
 
 struct s_infos		*tri_mtime(struct s_infos *infos, struct s_lsopt *ls_opt);
 
+struct s_infos		*utils_tri_mtime(struct s_infos *actual,
+						struct s_infos *infos, struct s_lsopt *ls_opt);
+
 struct s_infos		*tri_size(struct s_infos *infos, struct s_lsopt *ls_opt);
+
+struct s_infos		*utils_tri_size(struct s_infos *actual,
+						struct s_infos *infos, struct s_lsopt *ls_opt);
 
 struct s_infos		*addinfo();
 

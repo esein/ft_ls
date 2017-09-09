@@ -6,7 +6,7 @@
 #    By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/24 16:55:08 by gcadiou           #+#    #+#              #
-#    Updated: 2017/07/06 10:19:55 by gcadiou          ###   ########.fr        #
+#    Updated: 2017/09/09 18:00:17 by gcadiou          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRC = ls.c           \
 	  disp2.c        \
 	  disp3.c        \
 	  tri.c          \
+	  utils_tri.c    \
 	  opt_br.c       \
 	  disp_columns.c \
 	  stock_arg.c    \
