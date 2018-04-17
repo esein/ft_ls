@@ -1,5 +1,0 @@
-tri par insertion fonctionel pour l'ascii, reste a modifier les autre tri de facon identique.
-
-modif a faire : ne plus faire un tri ascii obligatoire si une autre option de tri est active mais plus verifier le tri ascii pendant le tri des autre options.
-
-last : verifier que tous les tris marchent puis norme
